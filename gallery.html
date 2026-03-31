@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Limitless Engraving</title>
+  <meta name="description" content="Browse our portfolio of custom laser engraved journals, water bottles, necklaces, bracelets, keychains, and more.">
+  <link rel="icon" type="image/png" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Gallery Page Styles */
+    .page-hero {
+      background: var(--navy-dark);
+      padding: 140px 0 80px;
+      text-align: center;
+    }
+
+    .page-hero .section-eyebrow { color: var(--accent-light); }
+    .page-hero .section-title { color: #fff; }
+    .page-hero p { color: rgba(255,255,255,0.6); margin: 0 auto; }
+
+    /* Filter Tabs */
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      background: var(--bg-alt);
+      color: var(--text-light);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    /* Gallery Grid */
+    .masonry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-bottom: 80px;
+    }
+
+    .masonry-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      aspect-ratio: 3/4;
+    }
+
+    .masonry-item.featured {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .masonry-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .masonry-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay-text {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .overlay-text span {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 2px;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    /* CTA Banner */
+    .gallery-cta {
+      background: var(--navy-dark);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .gallery-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .gallery-cta p {
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .masonry-grid { grid-template-columns: repeat(2, 1fr); }
+      .masonry-item.featured { grid-column: span 2; grid-row: span 1; }
+      .page-hero { padding: 120px 0 60px; }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-grid { grid-template-columns: 1fr; }
+      .masonry-item.featured { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-full" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="44">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-icon" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="36">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html" style="color: var(--navy); font-weight: 600;">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-eyebrow">Our Work</p>
+      <h1 class="section-title" style="font-size: clamp(32px, 5vw, 48px);">Gallery</h1>
+      <p style="font-size: 16px; max-width: 460px;">Every piece tells a story. Browse our collection of custom engraved products.</p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <div class="container">
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="journal">Journals</button>
+      <button class="filter-btn" data-filter="bottle">Water Bottles</button>
+      <button class="filter-btn" data-filter="necklace">Necklaces</button>
+      <button class="filter-btn" data-filter="bracelet">Bracelets</button>
+      <button class="filter-btn" data-filter="keychain">Keychains</button>
+      <button class="filter-btn" data-filter="cards">Cards</button>
+    </div>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="container">
+    <div class="masonry-grid" id="galleryGrid">
+      <!-- Row 1: Featured journal + necklace + bottle -->
+      <div class="masonry-item featured" data-category="journal" onclick="openLightbox(0)">
+        <img src="images/BRAND_AWESOMENESS_0010.jpg" alt="Cross Journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Cross Journal<span>Faith Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(1)">
+        <img src="images/BRAND_AWESOMENESS_0022.jpg" alt="Chain bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Chain Bar Necklace<span>Scripture Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="bottle" onclick="openLightbox(2)">
+        <img src="images/BRAND_AWESOMENESS_0001.jpg" alt="Water bottle" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Water Bottle<span>Custom Engraving</span></div></div>
+      </div>
+
+      <!-- Row 2: Mix of types -->
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(3)">
+        <img src="images/BRAND_AWESOMENESS_0005.jpg" alt="Faith journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Faith Journal<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="bracelet" onclick="openLightbox(4)">
+        <img src="images/BRAND_AWESOMENESS_0028.jpg" alt="Gold bracelet" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Gold Chain Bracelet<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(5)">
+        <img src="images/BRAND_AWESOMENESS_0025.jpg" alt="Dog tag keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Dog Tag Keychain<span>Custom Engraving</span></div></div>
+      </div>
+
+      <div class="masonry-item featured" data-category="cards" onclick="openLightbox(29)">
+        <img src="images/business-cards-1.png" alt="Metal Business Cards" loading="lazy" style="object-fit: contain; background: #f5f5f5;">
+        <div class="overlay"><div class="overlay-text">Metal Business Cards<span>Laser Engraved</span></div></div>
+      </div>
+
+      <!-- Row 3: Featured necklace + journals -->
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(6)">
+        <img src="images/BRAND_AWESOMENESS_0016.jpg" alt="Gold bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Gold Bar Necklace<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item featured" data-category="journal" onclick="openLightbox(7)">
+        <img src="images/BRAND_AWESOMENESS_0008.jpg" alt="Branch 49 journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Branch 49 Journal<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(8)">
+        <img src="images/BRAND_AWESOMENESS_0013.jpg" alt="Name journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Name Journal<span>Personalized</span></div></div>
+      </div>
+
+      <!-- Row 4: Mix -->
+      <div class="masonry-item" data-category="bracelet" onclick="openLightbox(9)">
+        <img src="images/BRAND_AWESOMENESS_0030.jpg" alt="Gold bracelet" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Gold Bracelet<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(10)">
+        <img src="images/BRAND_AWESOMENESS_0018.jpg" alt="Silver bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Silver Bar Necklace<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(11)">
+        <img src="images/BRAND_AWESOMENESS_0003.jpg" alt="Heart journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Heart Journal<span>Custom Design</span></div></div>
+      </div>
+
+      <div class="masonry-item" data-category="cards" onclick="openLightbox(30)">
+        <img src="images/business-cards-2.png" alt="Branch 49 Business Card" loading="lazy" style="object-fit: contain; background: #f5f5f5;">
+        <div class="overlay"><div class="overlay-text">Metal Business Card<span>Branch 49</span></div></div>
+      </div>
+
+      <!-- Row 5: Featured bracelet + details -->
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(12)">
+        <img src="images/BRAND_AWESOMENESS_0011.jpg" alt="Scripture journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Scripture Journal<span>Faith Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(13)">
+        <img src="images/BRAND_AWESOMENESS_0017.jpg" alt="Bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Bar Necklace<span>Custom Text</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(14)">
+        <img src="images/BRAND_AWESOMENESS_0027.jpg" alt="GCU Keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Keychain<span>Custom Logo Engraving</span></div></div>
+      </div>
+
+      <!-- Row 6 -->
+      <div class="masonry-item" data-category="bottle" onclick="openLightbox(15)">
+        <img src="images/BRAND_AWESOMENESS_0002.jpg" alt="Water bottle" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Water Bottle<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(16)">
+        <img src="images/BRAND_AWESOMENESS_0009.jpg" alt="Leather journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Leather Journal<span>Personalized Text</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(17)">
+        <img src="images/BRAND_AWESOMENESS_0019.jpg" alt="Bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Bar Necklace<span>Custom Text</span></div></div>
+      </div>
+
+      <div class="masonry-item" data-category="cards" onclick="openLightbox(31)">
+        <img src="images/business-cards-3.png" alt="SafeStride Business Card" loading="lazy" style="object-fit: contain; background: #f5f5f5;">
+        <div class="overlay"><div class="overlay-text">Metal Business Card<span>SafeStride</span></div></div>
+      </div>
+
+      <!-- Row 7 -->
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(18)">
+        <img src="images/BRAND_AWESOMENESS_0004.jpg" alt="Leather journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Leather Journal<span>Personalized Text</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(19)">
+        <img src="images/BRAND_AWESOMENESS_0024.jpg" alt="Faith Over Fear Keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Keychain<span>Faith Over Fear</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="bracelet" onclick="openLightbox(20)">
+        <img src="images/BRAND_AWESOMENESS_0029.jpg" alt="Bracelet" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Bracelet<span>Custom Engraving</span></div></div>
+      </div>
+
+      <!-- Row 8 -->
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(21)">
+        <img src="images/BRAND_AWESOMENESS_0026.jpg" alt="Keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Keychain<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(33)">
+        <img src="images/keychain-photo-1.png" alt="Photo Engraved Keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Keychain<span>Photo Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="keychain" onclick="openLightbox(34)">
+        <img src="images/keychain-photo-2.png" alt="Photo Engraved Keychain" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Keychain<span>Photo Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(22)">
+        <img src="images/BRAND_AWESOMENESS_0006.jpg" alt="Journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Journal<span>Custom Design</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(23)">
+        <img src="images/BRAND_AWESOMENESS_0020.jpg" alt="Necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Necklace<span>Custom Engraving</span></div></div>
+      </div>
+
+      <div class="masonry-item" data-category="cards" onclick="openLightbox(32)">
+        <img src="images/business-cards-4.png" alt="Pinnacle Coffee Cards" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Business Cards<span>Pinnacle Coffee</span></div></div>
+      </div>
+
+      <!-- Row 9 -->
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(24)">
+        <img src="images/BRAND_AWESOMENESS_0023.jpg" alt="Bar necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Bar Necklace<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(25)">
+        <img src="images/BRAND_AWESOMENESS_0007.jpg" alt="Journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Journal<span>Custom Engraving</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="bracelet" onclick="openLightbox(26)">
+        <img src="images/BRAND_AWESOMENESS_0031.jpg" alt="Bracelet" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Bracelet<span>Custom Engraving</span></div></div>
+      </div>
+
+      <!-- Row 10 -->
+      <div class="masonry-item" data-category="journal" onclick="openLightbox(27)">
+        <img src="images/BRAND_AWESOMENESS_0014.jpg" alt="Journal" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Journal<span>Custom Design</span></div></div>
+      </div>
+      <div class="masonry-item" data-category="necklace" onclick="openLightbox(28)">
+        <img src="images/BRAND_AWESOMENESS_0021.jpg" alt="Necklace" loading="lazy">
+        <div class="overlay"><div class="overlay-text">Necklace<span>Custom Engraving</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="gallery-cta">
+    <div class="container">
+      <h2>Have Something in Mind?</h2>
+      <p>We bring any design to life. Let's create something custom for you.</p>
+      <a href="custom.html" class="btn btn-primary" style="background: var(--accent); color: #fff;">Start a Custom Order</a>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navLightbox(-1)">&#8249;</button>
+    <img id="lightboxImg" src="" alt="Gallery image">
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navLightbox(1)">&#8250;</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" height="40" style="filter: brightness(0) invert(1);">
+        <p>Turning everyday items into personal, meaningful pieces.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="mailto:limitlessengravingco@gmail.com">limitlessengravingco@gmail.com</a>
+        <a href="https://instagram.com/limitless_engraving" target="_blank">@limitless_engraving</a>
+        <p style="color:#888; font-size:13px; margin-top:4px;">Arizona, US</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Limitless Engraving. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open');
+    });
+
+    // Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.masonry-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        items.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Lightbox
+    let currentIndex = 0;
+    const images = [...document.querySelectorAll('.masonry-item img')].map(img => img.src);
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightboxImg').src = images[index];
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function navLightbox(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      document.getElementById('lightboxImg').src = images[currentIndex];
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+  </script>
+</body>
+</html>

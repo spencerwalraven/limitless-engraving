@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk & Corporate Orders | Limitless Engraving</title>
+  <meta name="description" content="Custom laser engraving for weddings, corporate events, team gifts, and large orders. Volume discounts available.">
+  <link rel="icon" type="image/png" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: var(--navy-dark);
+      padding: 140px 0 80px;
+      text-align: center;
+    }
+    .page-hero .section-eyebrow { color: var(--accent-light); }
+    .page-hero .section-title { color: #fff; }
+    .page-hero p { color: rgba(255,255,255,0.6); margin: 0 auto; }
+
+    /* Use Cases */
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding: 80px 0 0;
+    }
+
+    .use-case {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .use-case-icon {
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    .use-case-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .use-case h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+
+    .use-case p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Pricing tiers */
+    .pricing-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--navy);
+      position: relative;
+    }
+
+    .pricing-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .pricing-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+
+    .pricing-range {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .pricing-amount {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+
+    .pricing-unit {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .pricing-features li {
+      font-size: 14px;
+      color: var(--text);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-alt);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Bulk form */
+    .bulk-form-section {
+      background: var(--bg-alt);
+      padding: 80px 0;
+    }
+
+    .bulk-form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .bulk-form-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+    }
+
+    .bulk-form-text > p {
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .trust-badge-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--white);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .trust-badge h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy-dark);
+    }
+
+    .trust-badge p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+      .use-cases { grid-template-columns: 1fr; gap: 16px; padding: 48px 0 0; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-section [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .bulk-form-layout { grid-template-columns: 1fr; gap: 40px; }
+      .page-hero { padding: 120px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-full" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="44">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-icon" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="36">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html" style="color: var(--navy); font-weight: 600;">Bulk Orders</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-eyebrow">Bulk Orders</p>
+      <h1 class="section-title" style="font-size: clamp(32px, 5vw, 48px);">Metal Business Cards in Bulk</h1>
+      <p style="font-size: 16px; max-width: 500px;">Laser engraved metal business cards that leave a lasting impression. Volume pricing that gets better the more you order.</p>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <div class="container">
+    <div class="use-cases">
+      <div class="use-case">
+        <div class="use-case-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><circle cx="12" cy="12" r="1"/></svg></div>
+        <h3>Startups & Entrepreneurs</h3>
+        <p>Make a first impression that sticks. Metal cards say you're serious about your brand before you say a word.</p>
+      </div>
+      <div class="use-case">
+        <div class="use-case-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Corporate Branding</h3>
+        <p>Equip your entire team with premium metal cards. Consistent branding across every handshake and networking event.</p>
+      </div>
+      <div class="use-case">
+        <div class="use-case-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Custom Designs</h3>
+        <p>Full-color logos, QR codes, double-sided engraving. We work with you to bring your design to life on metal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <section class="pricing-section">
+    <div class="container">
+      <p class="section-eyebrow" style="color: var(--accent);">Volume Pricing</p>
+      <h2 class="section-title">Laser Engraved Metal Business Cards</h2>
+      <p class="section-sub" style="margin:0 auto 48px; max-width:560px;">The more you order, the more you save. Two card styles available, both laser engraved with your custom design.</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; max-width:900px; margin:0 auto;">
+
+        <!-- Premium Thick Cards -->
+        <div class="pricing-card featured">
+          <h3>Premium Thick Cards</h3>
+          <div class="pricing-unit" style="margin-bottom:20px;">Heavy, premium feel</div>
+          <table style="width:100%; border-collapse:collapse; font-size:14px;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--border);">
+                <th style="text-align:left; padding:8px 0; font-weight:600; color:var(--navy-dark);">Quantity</th>
+                <th style="text-align:right; padding:8px 0; font-weight:600; color:var(--navy-dark);">Per Card</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">1 - 50</td><td style="text-align:right; font-weight:600; color:var(--accent);">$2.25</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">51 - 100</td><td style="text-align:right; font-weight:600; color:var(--accent);">$2.10</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">101 - 150</td><td style="text-align:right; font-weight:600; color:var(--accent);">$2.00</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">151 - 200</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.90</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">201 - 250</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.75</td></tr>
+              <tr><td style="padding:10px 0;">250+</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.60</td></tr>
+            </tbody>
+          </table>
+          <a href="#bulk-form" class="btn btn-primary btn-full" style="margin-top:24px;">Order Premium Cards</a>
+        </div>
+
+        <!-- Thin Cards -->
+        <div class="pricing-card">
+          <h3>Standard Thin Cards</h3>
+          <div class="pricing-unit" style="margin-bottom:20px;">Sleek, lightweight option</div>
+          <table style="width:100%; border-collapse:collapse; font-size:14px;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--border);">
+                <th style="text-align:left; padding:8px 0; font-weight:600; color:var(--navy-dark);">Quantity</th>
+                <th style="text-align:right; padding:8px 0; font-weight:600; color:var(--navy-dark);">Per Card</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">1 - 50</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.25</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">51 - 100</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.10</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">101 - 150</td><td style="text-align:right; font-weight:600; color:var(--accent);">$1.00</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">151 - 200</td><td style="text-align:right; font-weight:600; color:var(--accent);">$0.90</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 0;">201 - 250</td><td style="text-align:right; font-weight:600; color:var(--accent);">$0.75</td></tr>
+              <tr><td style="padding:10px 0;">250+</td><td style="text-align:right; font-weight:600; color:var(--accent);">$0.60</td></tr>
+            </tbody>
+          </table>
+          <a href="#bulk-form" class="btn btn-primary btn-full" style="margin-top:24px;">Order Thin Cards</a>
+        </div>
+      </div>
+
+      <!-- Production Times -->
+      <div style="max-width:600px; margin:48px auto 0; background:var(--bg-alt); border:1px solid var(--border); border-radius:var(--radius); padding:32px;">
+        <h3 style="font-size:18px; font-weight:600; color:var(--navy-dark); margin-bottom:16px; text-align:center;">Estimated Production Times</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">1 - 50 Cards</td><td style="text-align:right; font-weight:500;">1 - 2 Business Days</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">51 - 100 Cards</td><td style="text-align:right; font-weight:500;">2 - 3 Business Days</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">101 - 150 Cards</td><td style="text-align:right; font-weight:500;">4 - 5 Business Days</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">151 - 200 Cards</td><td style="text-align:right; font-weight:500;">6 - 7 Business Days</td></tr>
+          <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">201 - 250 Cards</td><td style="text-align:right; font-weight:500;">8 - 9 Business Days</td></tr>
+          <tr><td style="padding:8px 0;">250+ Cards</td><td style="text-align:right; font-weight:500;">10 - 12 Business Days</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bulk Form -->
+  <section class="bulk-form-section" id="bulk-form">
+    <div class="container">
+      <div class="bulk-form-layout">
+        <div class="bulk-form-text">
+          <p class="section-eyebrow" style="color: var(--accent);">Get Started</p>
+          <h2>Request a Bulk Quote</h2>
+          <p>Tell us about your project and we'll put together a custom quote within 24 hours. No commitment, just a conversation.</p>
+
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <div class="trust-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div>
+                <h4>Fast Turnaround</h4>
+                <p>Most bulk orders completed in 5-7 business days</p>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="trust-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+              <div>
+                <h4>Free Design Help</h4>
+                <p>Our team will help refine your design at no extra cost</p>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="trust-badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+              <div>
+                <h4>Nationwide Shipping</h4>
+                <p>We ship across the US, local pickup in Arizona</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form id="bulkForm" onsubmit="submitBulkForm(event)" class="contact-form" style="max-width:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="b-name">Name</label>
+                <input type="text" id="b-name" name="name" required placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label for="b-email">Email</label>
+                <input type="email" id="b-email" name="email" required placeholder="your@email.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-company">Company / Organization (optional)</label>
+              <input type="text" id="b-company" name="company" placeholder="Your company or organization">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="b-type">Card Type</label>
+                <select id="b-type" name="card_type" required>
+                  <option value="">Select type</option>
+                  <option value="Premium Thick">Premium Thick ($2.25/card)</option>
+                  <option value="Standard Thin">Standard Thin ($1.25/card)</option>
+                  <option value="Not Sure">Not sure yet</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="b-qty">Estimated Quantity</label>
+                <select id="b-qty" name="quantity_range" required>
+                  <option value="">Select range</option>
+                  <option value="1-50">1 - 50 cards</option>
+                  <option value="51-100">51 - 100 cards</option>
+                  <option value="101-150">101 - 150 cards</option>
+                  <option value="151-200">151 - 200 cards</option>
+                  <option value="201-250">201 - 250 cards</option>
+                  <option value="250+">250+ cards</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-details">Project Details</label>
+              <textarea id="b-details" name="details" rows="4" placeholder="Tell us about your design, logo, timeline, or any other details..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Request Quote</button>
+            <p id="bulkSuccess" style="display:none; text-align:center; color:#4caf50; margin-top:16px; font-weight:500;">Quote request sent! We'll get back to you within 24 hours.</p>
+          </form>
+          <script>
+            function submitBulkForm(e) {
+              e.preventDefault();
+              const name = document.getElementById('b-name').value;
+              const email = document.getElementById('b-email').value;
+              const company = document.getElementById('b-company').value;
+              const type = document.getElementById('b-type').value;
+              const qty = document.getElementById('b-qty').value;
+              const details = document.getElementById('b-details').value;
+
+              let body = `BULK BUSINESS CARD QUOTE REQUEST\n\n`;
+              body += `Name: ${name}\nEmail: ${email}\n`;
+              if (company) body += `Company: ${company}\n`;
+              body += `Card Type: ${type}\n`;
+              body += `Quantity: ${qty}\n`;
+              if (details) body += `\nDetails:\n${details}`;
+
+              const subject = encodeURIComponent('Bulk Business Card Quote from ' + name + (company ? ' at ' + company : ''));
+              window.open(`mailto:limitlessengravingco@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`, '_blank');
+
+              document.getElementById('bulkForm').reset();
+              document.getElementById('bulkSuccess').style.display = 'block';
+              setTimeout(() => { document.getElementById('bulkSuccess').style.display = 'none'; }, 5000);
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" height="40" style="filter: brightness(0) invert(1);">
+        <p>Turning everyday items into personal, meaningful pieces.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="mailto:limitlessengravingco@gmail.com">limitlessengravingco@gmail.com</a>
+        <a href="https://instagram.com/limitless_engraving" target="_blank">@limitless_engraving</a>
+        <p style="color:#888; font-size:13px; margin-top:4px;">Arizona, US</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container"><p>&copy; 2026 Limitless Engraving. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navToggle').classList.toggle('open');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

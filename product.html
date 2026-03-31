@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product | Limitless Engraving</title>
+  <meta name="description" content="Customize and order your personalized laser-engraved product from Limitless Engraving.">
+  <link rel="icon" type="image/png" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Sacramento&family=Bebas+Neue&family=Caveat:wght@400;700&family=Abril+Fatface&family=Amatic+SC:wght@700&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400&family=Lato:wght@300;400;700&family=Lobster&family=Montserrat:wght@300;400;600&family=Oswald:wght@300;400;600&family=Pacifico&family=Permanent+Marker&family=Poppins:wght@300;400;600&family=Raleway:wght@300;400;600&family=Roboto+Slab:wght@300;400;700&family=Satisfy&family=Shadows+Into+Light&family=Source+Serif+Pro:wght@400;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== PRODUCT PAGE ===== */
+    .product-page {
+      padding: 120px 0 80px;
+      min-height: 100vh;
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Gallery */
+    .product-gallery {
+      position: sticky;
+      top: 100px;
+    }
+
+    .main-image-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-alt);
+      aspect-ratio: 3/4;
+      margin-bottom: 12px;
+    }
+
+    .main-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+
+    .main-image-wrap img.fade-out {
+      opacity: 0;
+    }
+
+    .thumb-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .thumb-item {
+      width: 80px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, opacity 0.2s;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .thumb-item:hover {
+      opacity: 0.85;
+    }
+
+    .thumb-item.active {
+      border-color: var(--accent);
+      opacity: 1;
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Details */
+    .product-details {
+      padding-top: 8px;
+    }
+
+    .back-to-shop {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 20px;
+      padding: 8px 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .back-to-shop:hover {
+      color: var(--navy);
+      transform: translateX(-3px);
+    }
+
+    .product-breadcrumb {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .product-breadcrumb a {
+      color: var(--text-light);
+      transition: color 0.2s;
+    }
+
+    .product-breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .product-detail-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .product-detail-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .product-detail-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* Engraving Section */
+    .engrave-section {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-bottom: 28px;
+    }
+
+    .engrave-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy-dark);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .engrave-group {
+      margin-bottom: 22px;
+    }
+
+    .engrave-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .engrave-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+
+    .engrave-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Live Preview */
+    .engrave-preview {
+      background: var(--bg-alt);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .engrave-preview-text {
+      font-size: 22px;
+      color: var(--accent);
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .engrave-preview-placeholder {
+      font-size: 14px;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* Font Buttons */
+    .font-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .font-btn {
+      padding: 10px 18px;
+      background: var(--bg-alt);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .font-btn span {
+      font-size: 10px;
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      letter-spacing: normal;
+    }
+
+    .font-btn:hover {
+      border-color: var(--navy);
+    }
+
+    .font-btn.active {
+      border-color: var(--accent);
+      background: rgba(138,117,96,0.06);
+    }
+
+    /* Image Upload */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg-alt);
+    }
+
+    .upload-area:hover,
+    .upload-area.drag-over {
+      border-color: var(--accent);
+      background: rgba(138,117,96,0.04);
+    }
+
+    .upload-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: var(--text-light);
+    }
+
+    .upload-text {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .upload-text strong {
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .upload-preview {
+      display: none;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .upload-preview img {
+      max-height: 80px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .upload-remove {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--navy-dark);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    /* Add to Cart */
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 18px 32px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .add-to-cart-btn:hover {
+      background: var(--navy-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .add-to-cart-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Not Found */
+    .product-not-found {
+      text-align: center;
+      padding: 160px 24px 80px;
+    }
+
+    .product-not-found h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+    }
+
+    .product-not-found p {
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .product-gallery {
+        position: static;
+      }
+
+      .main-image-wrap {
+        aspect-ratio: 4/5;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-page {
+        padding: 100px 0 60px;
+      }
+
+      .thumb-item {
+        width: 64px;
+        height: 80px;
+      }
+
+      .font-options {
+        gap: 6px;
+      }
+
+      .font-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-full" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="44">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-icon" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)" height="36">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="cart-icon-btn" onclick="toggleCart()" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Content (populated by JS) -->
+  <div id="productContent"></div>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" onclick="closeCart()">&times;</button>
+    </div>
+    <div class="cart-empty" id="cartEmpty">
+      <p>Your cart is empty</p>
+      <p style="font-size:13px; color:var(--text-light); margin-top:4px;">Add products from the shop to get started.</p>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="cartCheckoutBtn" onclick="cartCheckout()" style="display:none;">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Cart Toast -->
+  <div class="cart-toast" id="cartToast"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" height="40" style="filter: brightness(0) invert(1);">
+        <p>Turning everyday items into personal, meaningful pieces.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="mailto:limitlessengravingco@gmail.com">limitlessengravingco@gmail.com</a>
+        <a href="https://instagram.com/limitless_engraving" target="_blank">@limitless_engraving</a>
+        <p style="color:#888; font-size:13px; margin-top:4px;">Arizona, US</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Limitless Engraving. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script>
+    // ===== PRODUCT DATA =====
+    const PRODUCTS = {
+      'journal-pen-holder': {
+        name: 'Journal - With Pen Holder',
+        price: 18,
+        images: ['0009', '0010', '0007', '0008'],
+        desc: 'A premium leather-bound journal with an integrated pen holder, perfect for daily reflections, notes, or as a thoughtful gift. Each journal is carefully engraved with your custom text or design, creating a one-of-a-kind keepsake that lasts.'
+      },
+      'journal-standard': {
+        name: 'Journal - Without Pen Holder',
+        price: 15,
+        images: ['0004', '0003', '0006', '0005', '0013', '0011', '0014'],
+        desc: 'Our classic leather journal in a clean, streamlined design. Soft to the touch and built to last, this journal is ideal for writers, planners, and anyone who loves putting pen to paper. Personalize it with custom laser engraving for a truly unique piece.'
+      },
+      'water-bottle': {
+        name: 'Water Bottle',
+        price: 23,
+        images: ['0001', '0002'],
+        desc: 'A double-walled stainless steel water bottle that keeps drinks cold for 24 hours or hot for 12. Durable, sleek, and ready for your custom engraving, whether it\u2019s a name, logo, motivational quote, or inside joke.'
+      },
+      'necklace-silver': {
+        name: 'Bar Necklace - Silver',
+        price: 15,
+        images: ['0018', '0019', '0022', '0023'],
+        desc: 'A delicate silver-tone bar necklace, perfect for engraving names, dates, coordinates, or a short phrase that means the world. Lightweight and elegant, it pairs beautifully with any outfit.'
+      },
+      'necklace-gold': {
+        name: 'Bar Necklace - Gold',
+        price: 20,
+        images: ['0016', '0017', '0020', '0021'],
+        desc: 'Our gold-tone bar necklace adds a warm, luxurious touch to personalized jewelry. Engrave it with initials, a special date, or a meaningful word. A stunning gift for birthdays, anniversaries, or just because.'
+      },
+      'bracelet-silver': {
+        name: 'Chain Bracelet - Silver',
+        price: 10,
+        images: ['0029', '0031'],
+        desc: 'A sleek silver-tone chain bracelet with a customizable engraving plate. Stackable, versatile, and perfect for everyday wear. Add your name, a mantra, or a date that matters most.'
+      },
+      'bracelet-gold': {
+        name: 'Chain Bracelet - Gold',
+        price: 15,
+        images: ['0028', '0030'],
+        desc: 'A warm gold-tone chain bracelet that elevates any wrist stack. The engraving plate catches the light beautifully and can be personalized with text or a small design of your choosing.'
+      },
+      'keychain': {
+        name: 'Keychain',
+        price: 10,
+        images: ['0025', '0026', '0027'],
+        extraImages: ['images/keychain-photo-1.png', 'images/keychain-photo-2.png'],
+        desc: 'A sturdy, premium keychain built for daily use. Engrave it with a name, inside joke, business logo, or anything that makes it yours. A small but mighty personalized accessory.'
+      },
+      'business-cards': {
+        name: 'Metal Business Cards',
+        price: 1.25,
+        images: [],
+        fullImages: ['images/business-cards-3.png', 'images/business-cards-1.png', 'images/business-cards-2.png', 'images/business-cards-4.png'],
+        desc: 'Laser engraved metal business cards that make a lasting impression. Available in premium thick or standard thin options with volume discounts. Perfect for entrepreneurs, professionals, and businesses that want to stand out.',
+        isBulk: true,
+        cardTypes: {
+          'Premium Thick': { price: 2.25, bulkPricing: [
+            { qty: '1-50', price: 2.25 }, { qty: '51-100', price: 2.10 }, { qty: '101-150', price: 2.00 },
+            { qty: '151-200', price: 1.90 }, { qty: '201-250', price: 1.75 }, { qty: '250+', price: 1.60 }
+          ]},
+          'Standard Thin': { price: 1.25, bulkPricing: [
+            { qty: '1-50', price: 1.25 }, { qty: '51-100', price: 1.10 }, { qty: '101-150', price: 1.00 },
+            { qty: '151-200', price: 0.90 }, { qty: '201-250', price: 0.75 }, { qty: '250+', price: 0.60 }
+          ]}
+        }
+      }
+    };
+
+    // ===== STATE =====
+    let selectedFont = 'Elegant';
+    let selectedFontFamily = "'Playfair Display', serif";
+    let uploadedImage = null;
+    let currentProduct = null;
+
+    // ===== INIT =====
+    function init() {
+      // Support both ?product=slug and #slug (serve strips query params)
+      const params = new URLSearchParams(window.location.search);
+      let slug = params.get('product');
+      if (!slug && window.location.hash) {
+        slug = window.location.hash.substring(1);
+      }
+      // Also check path-based: /product/slug
+      if (!slug) {
+        const pathParts = window.location.pathname.split('/');
+        const lastPart = pathParts[pathParts.length - 1];
+        if (lastPart && lastPart !== 'product' && lastPart !== 'product.html') {
+          slug = lastPart;
+        }
+      }
+      currentProduct = PRODUCTS[slug];
+
+      if (!currentProduct) {
+        renderNotFound();
+        return;
+      }
+
+      document.title = currentProduct.name + ' | Limitless Engraving';
+      renderProduct(currentProduct, slug);
+      // Auto-render bulk pricing for business cards
+      if (currentProduct.cardTypes) {
+        setTimeout(() => {
+          const firstBtn = document.querySelector('.card-type-btn');
+          if (firstBtn) selectCardType(firstBtn, 'Premium Thick');
+        }, 100);
+      }
+    }
+
+    // ===== RENDER PRODUCT =====
+    function renderProduct(product, slug) {
+      const imgBase = 'images/BRAND_AWESOMENESS_';
+      // Build image list: BRAND_AWESOMENESS codes + fullImages + extraImages
+      let allImages = product.images.map(code => imgBase + code + '.jpg');
+      if (product.fullImages) allImages = [...allImages, ...product.fullImages];
+      if (product.extraImages) allImages = [...allImages, ...product.extraImages];
+      const mainImg = allImages[0];
+
+      const thumbsHtml = allImages.map((src, i) =>
+        `<div class="thumb-item${i === 0 ? ' active' : ''}" onclick="switchImage('${src}', this)">
+          <img src="${src}" alt="${product.name} view ${i + 1}" loading="lazy">
+        </div>`
+      ).join('');
+
+      document.getElementById('productContent').innerHTML = `
+        <section class="product-page">
+          <div class="container">
+            <a href="index.html#products" class="back-to-shop">&larr; Back to Shop</a>
+            <div class="product-layout">
+
+              <!-- Gallery -->
+              <div class="product-gallery">
+                <div class="main-image-wrap">
+                  <img id="mainImage" src="${mainImg}" alt="${product.name}">
+                </div>
+                <div class="thumb-row">${thumbsHtml}</div>
+              </div>
+
+              <!-- Details -->
+              <div class="product-details">
+                <div class="product-breadcrumb">
+                  <a href="index.html">Home</a> &nbsp;/&nbsp; <a href="index.html#products">Shop</a> &nbsp;/&nbsp; ${product.name}
+                </div>
+                <h1 class="product-detail-name">${product.name}</h1>
+                <div class="product-detail-price" id="productPrice">${product.isBulk ? 'From $' + product.price.toFixed(2) + '/card' : '$' + product.price.toFixed(2)}</div>
+                ${product.cardTypes ? `
+                <div class="engrave-group" style="margin-bottom:20px;">
+                  <label class="engrave-label">Card Type</label>
+                  <div style="display:flex; gap:10px;">
+                    ${Object.keys(product.cardTypes).map((type, i) => `
+                      <button class="font-btn card-type-btn${i === 0 ? ' active' : ''}" data-type="${type}" onclick="selectCardType(this, '${type}')" style="flex:1; padding:12px; text-align:center;">
+                        <strong>${type}</strong><br><span style="font-size:13px; opacity:0.7;">$${product.cardTypes[type].price.toFixed(2)}/card</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                  <div id="bulkPricingTable" style="margin-top:15px;"></div>
+                </div>
+                ` : ''}
+                <p class="product-detail-desc">${product.desc}</p>
+
+                <!-- Engraving Customization -->
+                <div class="engrave-section">
+                  <div class="engrave-section-title">Customize Your Engraving</div>
+
+                  <!-- Text Input -->
+                  <div class="engrave-group">
+                    <label class="engrave-label">Engraving Text</label>
+                    <input type="text" class="engrave-input" id="engraveText" placeholder="Enter your text..." maxlength="60" oninput="updatePreview()">
+                  </div>
+
+                  <!-- Live Preview -->
+                  <div class="engrave-preview" id="engravePreview">
+                    <span class="engrave-preview-placeholder">Your text will appear here</span>
+                  </div>
+
+                  <!-- Font Selector -->
+                  <div class="engrave-group">
+                    <label class="engrave-label">Font Style</label>
+                    <div class="font-options">
+                      <button class="font-btn active" data-font="Elegant" data-family="'Playfair Display', serif" onclick="selectFont(this)" style="font-family:'Playfair Display',serif;">Abc<span>Elegant</span></button>
+                      <button class="font-btn" data-font="Script" data-family="'Sacramento', cursive" onclick="selectFont(this)" style="font-family:'Sacramento',cursive; font-size:18px;">Abc<span>Script</span></button>
+                      <button class="font-btn" data-font="Block" data-family="'Bebas Neue', sans-serif" onclick="selectFont(this)" style="font-family:'Bebas Neue',sans-serif; letter-spacing:2px;">ABC<span>Block</span></button>
+                      <button class="font-btn" data-font="Handwritten" data-family="'Caveat', cursive" onclick="selectFont(this)" style="font-family:'Caveat',cursive; font-size:18px;">Abc<span>Handwritten</span></button>
+                      <button class="font-btn" id="customFontBtn" onclick="toggleCustomFontDropdown()" style="font-size:14px;">⋯<span>Custom</span></button>
+                    </div>
+                    <div id="customFontDropdown" style="display:none; margin-top:10px;">
+                      <select id="customFontSelect" onchange="selectCustomFont(this)" style="width:100%; padding:10px 12px; background:var(--bg-light); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px; cursor:pointer;">
+                        <option value="" disabled selected>Choose a font...</option>
+                        <option value="'Abril Fatface', serif" style="font-family:'Abril Fatface',serif;">Abril Fatface</option>
+                        <option value="'Amatic SC', cursive" style="font-family:'Amatic SC',cursive;">Amatic SC</option>
+                        <option value="'Cinzel', serif" style="font-family:'Cinzel',serif;">Cinzel</option>
+                        <option value="'Cormorant Garamond', serif" style="font-family:'Cormorant Garamond',serif;">Cormorant Garamond</option>
+                        <option value="'Dancing Script', cursive" style="font-family:'Dancing Script',cursive;">Dancing Script</option>
+                        <option value="'Great Vibes', cursive" style="font-family:'Great Vibes',cursive;">Great Vibes</option>
+                        <option value="'Josefin Sans', sans-serif" style="font-family:'Josefin Sans',sans-serif;">Josefin Sans</option>
+                        <option value="'Lato', sans-serif" style="font-family:'Lato',sans-serif;">Lato</option>
+                        <option value="'Lobster', cursive" style="font-family:'Lobster',cursive;">Lobster</option>
+                        <option value="'Montserrat', sans-serif" style="font-family:'Montserrat',sans-serif;">Montserrat</option>
+                        <option value="'Oswald', sans-serif" style="font-family:'Oswald',sans-serif;">Oswald</option>
+                        <option value="'Pacifico', cursive" style="font-family:'Pacifico',cursive;">Pacifico</option>
+                        <option value="'Permanent Marker', cursive" style="font-family:'Permanent Marker',cursive;">Permanent Marker</option>
+                        <option value="'Poppins', sans-serif" style="font-family:'Poppins',sans-serif;">Poppins</option>
+                        <option value="'Raleway', sans-serif" style="font-family:'Raleway',sans-serif;">Raleway</option>
+                        <option value="'Roboto Slab', serif" style="font-family:'Roboto Slab',serif;">Roboto Slab</option>
+                        <option value="'Satisfy', cursive" style="font-family:'Satisfy',cursive;">Satisfy</option>
+                        <option value="'Shadows Into Light', cursive" style="font-family:'Shadows Into Light',cursive;">Shadows Into Light</option>
+                        <option value="'Source Serif Pro', serif" style="font-family:'Source Serif Pro',serif;">Source Serif Pro</option>
+                        <option value="'Tangerine', cursive" style="font-family:'Tangerine',cursive;">Tangerine</option>
+                      </select>
+                      <div id="customFontPreview" style="margin-top:8px; padding:12px; background:rgba(0,0,0,0.03); border-radius:8px; text-align:center; font-size:22px; color:var(--accent); min-height:48px;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Image Upload -->
+                  <div class="engrave-group">
+                    <label class="engrave-label">Upload Design (optional)</label>
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                      <div class="upload-icon">&#128247;</div>
+                      <div class="upload-text">Drag & drop your image or <strong>browse</strong></div>
+                      <div class="upload-hint">For best results, use a PNG with transparent background</div>
+                      <div class="upload-preview" id="uploadPreview">
+                        <img id="uploadPreviewImg" src="" alt="Upload preview">
+                        <button class="upload-remove" onclick="event.stopPropagation(); removeUpload()">&times;</button>
+                      </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" style="display:none;" onchange="handleUpload(this)">
+                  </div>
+
+                  <!-- Design Description -->
+                  <div class="engrave-group">
+                    <label class="engrave-label">Describe Your Design</label>
+                    <textarea id="designDescription" rows="3" placeholder="e.g., Logo centered, name in top left, scripture along the bottom..." style="width:100%; padding:12px; background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px; font-family:inherit; resize:vertical;"></textarea>
+                  </div>
+
+                  <!-- Preview Upload Prompt -->
+                  <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; padding:16px; margin-top:8px;">
+                    <p style="font-size:13px; color:var(--text); margin-bottom:8px;">
+                      <strong>Have a preview from our design tool?</strong> Upload a screenshot of your design so we know exactly what you want.
+                    </p>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <button type="button" onclick="document.getElementById('previewFileInput').click()" style="padding:8px 16px; background:var(--navy-dark); color:#fff; border:none; border-radius:6px; font-size:13px; cursor:pointer;">Upload Preview Screenshot</button>
+                      <span id="previewFileName" style="font-size:12px; color:var(--text-light);"></span>
+                    </div>
+                    <input type="file" id="previewFileInput" accept="image/*" style="display:none;" onchange="handlePreviewUpload(this)">
+                    <p style="font-size:11px; color:var(--text-light); margin-top:8px;">
+                      Tip: Use our <a href="index.html#demo" style="color:var(--accent);">Engraving Preview</a> tool to design your product, then screenshot it and upload here.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Add to Cart -->
+                ${product.isBulk ? `
+                <a href="bulk.html#bulk-form" class="add-to-cart-btn" style="display:block; text-align:center; text-decoration:none; color:#fff;">
+                  Request a Quote
+                </a>
+                <a href="bulk.html" style="display:block; text-align:center; margin-top:12px; color:var(--accent); font-size:14px; text-decoration:none;">View Volume Pricing &rarr;</a>
+                ` : `
+                <button class="add-to-cart-btn" id="addToCartBtn" onclick="handleAddToCart()">
+                  Add to Cart | $${product.price.toFixed(2)}
+                </button>
+                `}
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+
+      // Set up drag and drop
+      setupDragDrop();
+    }
+
+    // ===== RENDER NOT FOUND =====
+    function renderNotFound() {
+      document.getElementById('productContent').innerHTML = `
+        <div class="product-not-found">
+          <h1>Product Not Found</h1>
+          <p>The product you're looking for doesn't exist or has been removed.</p>
+          <a href="index.html#products" class="btn btn-primary">Browse All Products</a>
+        </div>
+      `;
+    }
+
+    // ===== IMAGE GALLERY =====
+    function switchImage(src, thumbEl) {
+      const mainImg = document.getElementById('mainImage');
+      mainImg.classList.add('fade-out');
+
+      setTimeout(() => {
+        mainImg.src = src;
+        mainImg.classList.remove('fade-out');
+      }, 200);
+
+      document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+      thumbEl.classList.add('active');
+    }
+
+    // ===== CARD TYPE SELECTOR =====
+    let selectedCardType = 'Premium Thick';
+    function selectCardType(btn, type) {
+      document.querySelectorAll('.card-type-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCardType = type;
+      const product = currentProduct;
+      if (product && product.cardTypes && product.cardTypes[type]) {
+        const ct = product.cardTypes[type];
+        document.getElementById('productPrice').textContent = '$' + ct.price.toFixed(2) + '/card';
+        // Render bulk pricing table
+        const table = product.cardTypes[type].bulkPricing;
+        let html = '<table style="width:100%; border-collapse:collapse; font-size:13px; margin-top:8px;">';
+        html += '<tr style="border-bottom:1px solid var(--border);"><th style="text-align:left; padding:6px 8px; opacity:0.6;">Quantity</th><th style="text-align:right; padding:6px 8px; opacity:0.6;">Price/Card</th></tr>';
+        table.forEach(row => {
+          html += `<tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;">${row.qty}</td><td style="text-align:right; padding:6px 8px; font-weight:600;">$${row.price.toFixed(2)}</td></tr>`;
+        });
+        html += '</table>';
+        document.getElementById('bulkPricingTable').innerHTML = html;
+      }
+    }
+
+    // ===== FONT SELECTOR =====
+    function selectFont(btn) {
+      document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedFont = btn.dataset.font;
+      selectedFontFamily = btn.dataset.family;
+      // Hide custom dropdown when selecting a preset font
+      const dropdown = document.getElementById('customFontDropdown');
+      if (dropdown) dropdown.style.display = 'none';
+      const select = document.getElementById('customFontSelect');
+      if (select) select.value = '';
+      updatePreview();
+    }
+
+    function toggleCustomFontDropdown() {
+      const dropdown = document.getElementById('customFontDropdown');
+      const btn = document.getElementById('customFontBtn');
+      if (dropdown.style.display === 'none') {
+        dropdown.style.display = 'block';
+        document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else {
+        dropdown.style.display = 'none';
+      }
+    }
+
+    function selectCustomFont(select) {
+      const fontFamily = select.value;
+      if (!fontFamily) return;
+      selectedFontFamily = fontFamily;
+      selectedFont = 'Custom';
+      const preview = document.getElementById('customFontPreview');
+      const text = document.getElementById('engraveText')?.value || 'Preview';
+      preview.style.fontFamily = fontFamily;
+      preview.textContent = text;
+      updatePreview();
+    }
+
+    // ===== LIVE PREVIEW =====
+    function updatePreview() {
+      const text = document.getElementById('engraveText')?.value || '';
+      const preview = document.getElementById('engravePreview');
+      if (!preview) return;
+
+      if (text.trim()) {
+        preview.innerHTML = `<span class="engrave-preview-text" style="font-family:${selectedFontFamily};">${text}</span>`;
+      } else {
+        preview.innerHTML = '<span class="engrave-preview-placeholder">Your text will appear here</span>';
+      }
+    }
+
+    // ===== IMAGE UPLOAD =====
+    function setupDragDrop() {
+      const area = document.getElementById('uploadArea');
+      if (!area) return;
+
+      ['dragenter', 'dragover'].forEach(evt => {
+        area.addEventListener(evt, (e) => {
+          e.preventDefault();
+          area.classList.add('drag-over');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(evt => {
+        area.addEventListener(evt, (e) => {
+          e.preventDefault();
+          area.classList.remove('drag-over');
+        });
+      });
+
+      area.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0 && files[0].type.startsWith('image/')) {
+          processFile(files[0]);
+        }
+      });
+    }
+
+    function handleUpload(input) {
+      if (input.files.length > 0) {
+        processFile(input.files[0]);
+      }
+    }
+
+    function processFile(file) {
+      uploadedImage = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const preview = document.getElementById('uploadPreview');
+        const previewImg = document.getElementById('uploadPreviewImg');
+        previewImg.src = e.target.result;
+        preview.style.display = 'inline-block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeUpload() {
+      uploadedImage = null;
+      const preview = document.getElementById('uploadPreview');
+      const fileInput = document.getElementById('fileInput');
+      preview.style.display = 'none';
+      fileInput.value = '';
+    }
+
+    // ===== ADD TO CART =====
+    let previewScreenshot = null;
+
+    function handlePreviewUpload(input) {
+      if (input.files && input.files[0]) {
+        previewScreenshot = input.files[0];
+        document.getElementById('previewFileName').textContent = input.files[0].name;
+      }
+    }
+
+    function handleAddToCart() {
+      if (!currentProduct) return;
+
+      const text = document.getElementById('engraveText')?.value || '';
+      const description = document.getElementById('designDescription')?.value || '';
+
+      addToCart({
+        product: currentProduct.name,
+        engravingText: text,
+        font: selectedFont,
+        hasImage: !!uploadedImage,
+        hasPreviewScreenshot: !!previewScreenshot,
+        designDescription: description,
+        cardType: currentProduct.cardTypes ? selectedCardType : null,
+        price: currentProduct.price,
+        quantity: 1
+      });
+    }
+
+    // ===== MOBILE NAV =====
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navToggle').classList.toggle('open');
+    });
+
+    // ===== INIT ON LOAD =====
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

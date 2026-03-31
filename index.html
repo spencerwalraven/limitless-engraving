@@ -1,0 +1,2910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limitless Engraving | Custom Laser Engraving</title>
+  <meta name="description" content="Custom laser engraving for journals, water bottles, jewelry, and more. Personalized gifts, corporate orders, and custom designs, engraved with precision in Arizona.">
+  <link rel="icon" type="image/png" href="images/logo-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Sacramento&family=Bebas+Neue&family=Caveat:wght@400;700&family=Abril+Fatface&family=Amatic+SC:wght@700&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400&family=Lato:wght@300;400;700&family=Lobster&family=Montserrat:wght@300;400;600&family=Oswald:wght@300;400;600&family=Pacifico&family=Permanent+Marker&family=Poppins:wght@300;400;600&family=Raleway:wght@300;400;600&family=Roboto+Slab:wght@300;400;700&family=Satisfy&family=Shadows+Into+Light&family=Source+Serif+Pro:wght@400;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== NEW HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg, .hero-overlay { display: none; }
+
+    /* Subtle grid pattern */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Ambient glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(138,117,96,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px;
+    }
+
+    .hero-logo {
+      width: 240px;
+      height: auto;
+      margin: 0 auto 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-eyebrow {
+      color: var(--accent-light) !important;
+      letter-spacing: 3px;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+
+    .hero h1 {
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    .hero-sub {
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+
+    .hero-cta {
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stats bar */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      animation: fadeUp 0.8s ease 0.5s both;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ===== MATERIALS SECTION ===== */
+    .materials {
+      padding: 100px 0;
+      background: var(--white);
+      text-align: center;
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .material-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      group: true;
+    }
+
+    .material-card-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .material-card:hover .material-card-bg {
+      transform: scale(1.08);
+    }
+
+    .material-card-bg.metal {
+      background: linear-gradient(145deg, #c0c0c0 0%, #888 30%, #b0b0b0 50%, #666 80%, #999 100%);
+    }
+
+    .material-card-bg.wood {
+      background: linear-gradient(145deg, #c8a882 0%, #a67c52 30%, #d4a574 50%, #8b6340 80%, #b08660 100%);
+    }
+
+    .material-card-bg.leather {
+      background: linear-gradient(145deg, #8b5e3c 0%, #6b3a1f 30%, #a0724c 50%, #5c2d0e 80%, #7a4b2d 100%);
+    }
+
+    .material-card-bg.other {
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-dark) 50%, #1a2332 100%);
+    }
+
+    /* Texture overlays */
+    .material-card-bg.metal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+    }
+
+    .material-card-bg.wood::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(175deg, transparent, transparent 8px, rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 10px);
+    }
+
+    .material-card-bg.leather::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    }
+
+    .material-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+    }
+
+    .material-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .material-card-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .material-card-content p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    .material-card-icon {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.3s;
+    }
+
+    .material-card:hover .material-card-icon {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .material-card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===== INTERACTIVE DEMO ===== */
+    .demo {
+      padding: 100px 0;
+      background: var(--navy-dark);
+      color: #fff;
+    }
+
+    .demo .section-title { color: #fff; }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 48px;
+      align-items: start;
+    }
+
+    .demo-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .demo-control-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+    }
+
+    /* Product picker */
+    .demo-products {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    .demo-product-btn {
+      padding: 12px 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .demo-product-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .demo-product-btn.active {
+      background: rgba(138,117,96,0.15);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .demo-product-btn .prod-icon {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    /* Text input */
+    .demo-text-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .demo-text-input:focus {
+      border-color: var(--accent);
+    }
+
+    .demo-text-input::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* Font picker */
+    .demo-fonts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .demo-font-btn {
+      padding: 14px 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .demo-font-btn span {
+      display: block;
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .demo-font-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .demo-font-btn.active { background: rgba(138,117,96,0.15); border-color: var(--accent); color: #fff; }
+
+
+    /* Preview */
+    .demo-preview {
+      position: sticky;
+      top: 100px;
+    }
+
+    .demo-preview-frame {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-preview-product {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .demo-preview-product img {
+      display: none;
+    }
+
+    /* Blank product mockups */
+    .demo-mockup {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+    }
+
+    /* Journal */
+    .demo-mockup.journal {
+      width: 280px;
+      height: 380px;
+      background: linear-gradient(145deg, #c8a882, #b08660);
+      border-radius: 4px 12px 12px 4px;
+      box-shadow: -4px 0 0 #8b6340, 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .demo-mockup.journal::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.15), transparent);
+      border-radius: 4px 0 0 4px;
+    }
+
+    /* SVG-based mockups - all use inline SVGs */
+    .demo-mockup.bottle,
+    .demo-mockup.necklace,
+    .demo-mockup.keychain,
+    .demo-mockup.bracelet {
+      background: none !important;
+      box-shadow: none !important;
+      overflow: visible;
+    }
+    .demo-mockup.bottle::before, .demo-mockup.bottle::after,
+    .demo-mockup.necklace::before, .demo-mockup.necklace::after,
+    .demo-mockup.keychain::before, .demo-mockup.keychain::after,
+    .demo-mockup.bracelet::before, .demo-mockup.bracelet::after {
+      display: none !important;
+    }
+    .demo-mockup .product-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Product color swatches */
+    .demo-product-colors {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .demo-pcolor-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .demo-pcolor-btn:hover {
+      transform: scale(1.1);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .demo-pcolor-btn.active {
+      border-color: #fff;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,255,255,0.5);
+    }
+
+    .demo-pcolor-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .demo-pcolor-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Upload area */
+    .demo-upload-area {
+      border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-upload-area:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .demo-upload-area.dragover {
+      border-color: var(--accent-light);
+      background: rgba(138,117,96,0.08);
+    }
+
+    .demo-upload-content p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .demo-upload-preview {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-upload-preview img {
+      max-height: 60px;
+      max-width: 120px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    #uploadGroup.hidden { display: none; }
+
+    .demo-img-controls {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .img-control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .img-control-row label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      width: 60px;
+      flex-shrink: 0;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .demo-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+    }
+
+    .demo-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .img-tint-btn.active {
+      border-color: rgba(255,255,255,0.5) !important;
+    }
+
+    .rotation-deg {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      min-width: 36px;
+      text-align: right;
+      font-family: 'Inter', monospace;
+    }
+
+    .demo-add-text-btn {
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .demo-add-text-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+
+    .extra-text-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .extra-text-row input {
+      flex: 1;
+    }
+
+    .extra-text-remove {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      padding-top: 12px;
+    }
+
+    .extra-text-remove:hover {
+      background: rgba(255,80,80,0.15);
+      border-color: rgba(255,80,80,0.3);
+      color: #ff5050;
+    }
+
+    .demo-extra-text {
+      position: absolute;
+      font-size: 16px;
+      text-align: center;
+      z-index: 2;
+      cursor: grab;
+      user-select: none;
+      pointer-events: auto;
+    }
+
+    .demo-extra-text:hover {
+      outline: 1px dashed rgba(255,255,255,0.3);
+      outline-offset: 4px;
+    }
+
+    .demo-engrave-text, .demo-extra-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      text-align: center;
+      max-width: 80%;
+      width: max-content;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      line-height: 1.3;
+      z-index: 2;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .demo-draggable {
+      cursor: grab;
+      user-select: none;
+    }
+
+    .demo-draggable.dragging {
+      cursor: grabbing;
+      opacity: 1 !important;
+    }
+
+    .demo-draggable:hover {
+      outline: 1px dashed rgba(255,255,255,0.3);
+      outline-offset: 4px;
+    }
+
+    .demo-resize-handle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 50%;
+      cursor: nwse-resize;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 10;
+      pointer-events: auto;
+    }
+    .demo-resize-handle.bottom-right {
+      bottom: -5px;
+      right: -5px;
+    }
+    .demo-resize-handle.bottom-left {
+      bottom: -5px;
+      left: -5px;
+      cursor: nesw-resize;
+    }
+    .demo-resize-handle.top-right {
+      top: -5px;
+      right: -5px;
+      cursor: nesw-resize;
+    }
+    .demo-resize-handle.top-left {
+      top: -5px;
+      left: -5px;
+      cursor: nwse-resize;
+    }
+    .demo-engrave-text:hover .demo-resize-handle,
+    .demo-extra-text:hover .demo-resize-handle,
+    .demo-engrave-text.resizing .demo-resize-handle,
+    .demo-extra-text.resizing .demo-resize-handle {
+      opacity: 1;
+    }
+
+    .demo-drag-hint {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      z-index: 3;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .demo-reset-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-family: inherit;
+      padding: 5px 10px;
+      cursor: pointer;
+      z-index: 5;
+      transition: all 0.2s;
+      opacity: 0;
+    }
+
+    .demo-mockup:hover .demo-reset-btn,
+    .demo-reset-btn.show {
+      opacity: 1;
+    }
+
+    .demo-reset-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .demo-preview-label {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .demo-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .demo-cta .btn-primary {
+      background: var(--accent);
+    }
+
+    .demo-cta .btn-primary:hover {
+      background: var(--accent-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .materials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-stats { flex-direction: column; gap: 16px; }
+      .materials-grid { grid-template-columns: repeat(2, 1fr); }
+      .material-card { aspect-ratio: 1; }
+      .demo-layout { grid-template-columns: 1fr; }
+      .demo-preview { position: static; order: -1; }
+      .demo-preview-frame { min-height: 350px; padding: 24px; }
+      .demo-products { grid-template-columns: repeat(3, 1fr); }
+      .demo-fonts { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .materials-grid { grid-template-columns: 1fr; }
+      .material-card { aspect-ratio: 4/3; }
+    }
+
+    /* Keychain shape & charm selectors */
+    .keychain-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .kc-opt-btn, .kc-charm-btn {
+      padding: 8px 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .kc-opt-btn:hover, .kc-charm-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .kc-opt-btn.active, .kc-charm-btn.active {
+      background: rgba(138,117,96,0.15);
+      border-color: var(--accent);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-dark" height="40" style="filter: brightness(0) invert(1);">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" class="nav-logo-light" height="40" style="filter: brightness(0) saturate(100%) invert(18%) sepia(15%) saturate(800%) hue-rotate(170deg) brightness(95%)">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#materials">Materials</a>
+        <a href="#demo">Try It</a>
+        <a href="#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="cart-icon-btn" onclick="toggleCart()" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <img src="images/logo.png" alt="Limitless Engraving" class="hero-logo" style="filter: brightness(0) invert(1);">
+      <p class="hero-eyebrow">Custom Laser Engraving</p>
+      <h1>Your Vision.<br><em>Our Precision.</em></h1>
+      <p class="hero-sub">Transform your vision into a custom-engraved masterpiece on metal, wood, leather, and more.</p>
+      <div class="hero-cta">
+        <a href="#demo" class="btn btn-primary">Try the Engraving Preview</a>
+        <a href="custom.html" class="btn btn-outline">Get a Custom Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="materials section" id="materials">
+    <div class="container">
+      <p class="section-eyebrow">What We Engrave</p>
+      <h2 class="section-title">Choose Your Material</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Every material tells a different story. We engrave with precision on all of these, and more.</p>
+
+      <div class="materials-grid">
+        <div class="material-card">
+          <div class="material-card-bg metal"></div>
+          <div class="material-card-overlay"></div>
+          <div class="material-card-icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="material-card-content">
+            <h3>Metal</h3>
+            <p>Stainless steel, aluminum, brass. Sharp, permanent engravings that last forever.</p>
+          </div>
+        </div>
+
+        <div class="material-card">
+          <div class="material-card-bg wood"></div>
+          <div class="material-card-overlay"></div>
+          <div class="material-card-icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+          </div>
+          <div class="material-card-content">
+            <h3>Wood</h3>
+            <p>Warm, natural grain with deep engraving. Perfect for signs, gifts, and home decor.</p>
+          </div>
+        </div>
+
+        <div class="material-card">
+          <div class="material-card-bg leather"></div>
+          <div class="material-card-overlay"></div>
+          <div class="material-card-icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="material-card-content">
+            <h3>Leather</h3>
+            <p>Journals, wallets, bags. Soft, elegant engravings on premium leather goods.</p>
+          </div>
+        </div>
+
+        <div class="material-card">
+          <div class="material-card-bg other"></div>
+          <div class="material-card-overlay"></div>
+          <div class="material-card-icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="material-card-content">
+            <h3>& More</h3>
+            <p>Acrylic, glass, fabric. If you can imagine it, we can probably engrave it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE DEMO -->
+  <section class="demo section" id="demo">
+    <div class="container">
+      <p class="section-eyebrow" style="color:var(--accent-light);">Try It Yourself</p>
+      <h2 class="section-title">Preview Your Engraving</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5);">Pick a product, type your text, and see it come to life before you order.</p>
+
+      <div class="demo-layout">
+        <div class="demo-controls">
+
+          <!-- Product -->
+          <div class="demo-control-group">
+            <label>Choose a Product</label>
+            <div class="demo-products">
+              <button class="demo-product-btn active" data-product="journal" data-img="images/BRAND_AWESOMENESS_0005.jpg" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/></svg></span>Journal
+              </button>
+              <button class="demo-product-btn" data-product="bottle" data-img="images/BRAND_AWESOMENESS_0001.jpg" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8v3H8z"/><path d="M9 5c-1 1-2 3-2 5v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V10c0-2-1-4-2-5"/><line x1="10" y1="2" x2="14" y2="2"/></svg></span>Bottle
+              </button>
+              <button class="demo-product-btn" data-product="necklace" data-img="images/BRAND_AWESOMENESS_0016.jpg" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2C4 6 3.5 10 4 13c.5 3 2.5 5 5 6"/><path d="M19 2c1 4 1.5 8 1 11-.5 3-2.5 5-5 6"/><rect x="7" y="18" width="10" height="3" rx="1.5"/></svg></span>Necklace
+              </button>
+              <button class="demo-product-btn" data-product="bracelet" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 32 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="2.5" cy="8" rx="2" ry="3"/><ellipse cx="5.5" cy="8" rx="1.5" ry="2.5"/><ellipse cx="8" cy="8" rx="1.5" ry="2.5"/><line x1="9.5" y1="8" x2="11" y2="8"/><rect x="11" y="4" width="10" height="8" rx="2.5"/><line x1="21" y1="8" x2="22.5" y2="8"/><ellipse cx="24" cy="8" rx="1.5" ry="2.5"/><ellipse cx="26.5" cy="8" rx="1.5" ry="2.5"/><ellipse cx="29.5" cy="8" rx="2" ry="3"/></svg></span>Bracelet
+              </button>
+              <button class="demo-product-btn" data-product="keychain" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3.5"/><path d="M10 8h4"/><rect x="8" y="10" width="8" height="12" rx="1.5"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>Keychain
+              </button>
+              <button class="demo-product-btn" data-product="cards" onclick="selectDemoProduct(this)">
+                <span class="prod-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="6" y1="9" x2="14" y2="9"/><line x1="6" y1="12" x2="11" y2="12"/><line x1="6" y1="15" x2="9" y2="15"/></svg></span>Cards
+              </button>
+            </div>
+          </div>
+
+          <!-- Keychain Shape & Charm (visible only when keychain selected) -->
+          <div class="demo-control-group" id="keychainOptionsGroup" style="display:none;">
+            <label>Keychain Shape</label>
+            <div class="keychain-options">
+              <button class="kc-opt-btn active" data-shape="dogtag" onclick="selectKeychainShape(this)">Dog Tag</button>
+              <button class="kc-opt-btn" data-shape="circle" onclick="selectKeychainShape(this)">Circle</button>
+              <button class="kc-opt-btn" data-shape="rectangle" onclick="selectKeychainShape(this)">Rectangle</button>
+              <button class="kc-opt-btn" data-shape="heart" onclick="selectKeychainShape(this)">Heart</button>
+            </div>
+            <label style="margin-top:12px;">Charm</label>
+            <div class="keychain-options">
+              <button class="kc-charm-btn active" data-charm="cross" onclick="selectKeychainCharm(this)">Cross</button>
+              <button class="kc-charm-btn" data-charm="none" onclick="selectKeychainCharm(this)">None</button>
+              <button class="kc-charm-btn" data-charm="star" onclick="selectKeychainCharm(this)">Star</button>
+              <button class="kc-charm-btn" data-charm="heart" onclick="selectKeychainCharm(this)">Heart</button>
+            </div>
+          </div>
+
+          <div class="demo-control-group" id="cardMaterialGroup" style="display:none;">
+            <label>Card Material</label>
+            <div class="keychain-options">
+              <button class="kc-opt-btn active" data-material="cardboard" onclick="selectCardMaterial(this)">Cardboard</button>
+              <button class="kc-opt-btn" data-material="metal" onclick="selectCardMaterial(this)">Metal</button>
+            </div>
+          </div>
+
+          <!-- Product Color -->
+          <div class="demo-control-group" id="productColorGroup">
+            <label>Product Color</label>
+            <div class="demo-product-colors" id="productColors">
+              <!-- Populated by JS based on selected product -->
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="demo-control-group">
+            <label style="display:flex; justify-content:space-between; align-items:center;">Your Text <button type="button" id="noTextBtn" onclick="toggleNoText()" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#aaa; padding:4px 12px; border-radius:6px; font-size:11px; cursor:pointer; letter-spacing:0.5px;">HIDE TEXT</button></label>
+            <input type="text" class="demo-text-input" id="demoText" placeholder="Type something..." value="Limitless" oninput="updatePreview()">
+            <div id="extraTextInputs"></div>
+            <button type="button" class="demo-add-text-btn" onclick="addTextLine()">+ Add another text line</button>
+          </div>
+
+          <!-- Text Adjustments -->
+          <div class="demo-control-group">
+            <label>Text Adjustments</label>
+            <div class="demo-img-controls" style="display:flex;">
+              <div class="img-control-row">
+                <label>Rotation</label>
+                <input type="range" min="-180" max="180" value="0" class="demo-slider" id="textRotSlider" oninput="updateTextRotation(this.value)">
+                <span class="rotation-deg" id="textRotDeg">0°</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Font -->
+          <div class="demo-control-group">
+            <label>Font Style</label>
+            <div class="demo-fonts">
+              <button class="demo-font-btn active" data-font="'Playfair Display', serif" onclick="selectDemoFont(this)" style="font-family:'Playfair Display',serif;">
+                Abc<span>Elegant</span>
+              </button>
+              <button class="demo-font-btn" data-font="'Sacramento', cursive" onclick="selectDemoFont(this)" style="font-family:'Sacramento',cursive; font-size:22px;">
+                Abc<span>Script</span>
+              </button>
+              <button class="demo-font-btn" data-font="'Bebas Neue', sans-serif" onclick="selectDemoFont(this)" style="font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px;">
+                ABC<span>Block</span>
+              </button>
+              <button class="demo-font-btn" data-font="'Caveat', cursive" onclick="selectDemoFont(this)" style="font-family:'Caveat',cursive; font-size:22px;">
+                Abc<span>Handwritten</span>
+              </button>
+              <button class="demo-font-btn" id="customFontBtn" onclick="toggleCustomFontDropdown()" style="font-size:14px; position:relative;">
+                ⋯<span>Custom</span>
+              </button>
+            </div>
+            <div id="customFontDropdown" style="display:none; margin-top:10px;">
+              <select id="customFontSelect" onchange="selectCustomFont(this)" style="width:100%; padding:10px 12px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:8px; color:#fff; font-size:14px; cursor:pointer;">
+                <option value="" disabled selected>Choose a font...</option>
+                <option value="'Abril Fatface', serif" style="font-family:'Abril Fatface',serif;">Abril Fatface</option>
+                <option value="'Amatic SC', cursive" style="font-family:'Amatic SC',cursive;">Amatic SC</option>
+                <option value="'Cinzel', serif" style="font-family:'Cinzel',serif;">Cinzel</option>
+                <option value="'Cormorant Garamond', serif" style="font-family:'Cormorant Garamond',serif;">Cormorant Garamond</option>
+                <option value="'Dancing Script', cursive" style="font-family:'Dancing Script',cursive;">Dancing Script</option>
+                <option value="'Great Vibes', cursive" style="font-family:'Great Vibes',cursive;">Great Vibes</option>
+                <option value="'Josefin Sans', sans-serif" style="font-family:'Josefin Sans',sans-serif;">Josefin Sans</option>
+                <option value="'Lato', sans-serif" style="font-family:'Lato',sans-serif;">Lato</option>
+                <option value="'Lobster', cursive" style="font-family:'Lobster',cursive;">Lobster</option>
+                <option value="'Montserrat', sans-serif" style="font-family:'Montserrat',sans-serif;">Montserrat</option>
+                <option value="'Oswald', sans-serif" style="font-family:'Oswald',sans-serif;">Oswald</option>
+                <option value="'Pacifico', cursive" style="font-family:'Pacifico',cursive;">Pacifico</option>
+                <option value="'Permanent Marker', cursive" style="font-family:'Permanent Marker',cursive;">Permanent Marker</option>
+                <option value="'Poppins', sans-serif" style="font-family:'Poppins',sans-serif;">Poppins</option>
+                <option value="'Raleway', sans-serif" style="font-family:'Raleway',sans-serif;">Raleway</option>
+                <option value="'Roboto Slab', serif" style="font-family:'Roboto Slab',serif;">Roboto Slab</option>
+                <option value="'Satisfy', cursive" style="font-family:'Satisfy',cursive;">Satisfy</option>
+                <option value="'Shadows Into Light', cursive" style="font-family:'Shadows Into Light',cursive;">Shadows Into Light</option>
+                <option value="'Source Serif Pro', serif" style="font-family:'Source Serif Pro',serif;">Source Serif Pro</option>
+                <option value="'Tangerine', cursive" style="font-family:'Tangerine',cursive;">Tangerine</option>
+              </select>
+              <div id="customFontPreview" style="margin-top:8px; padding:12px; background:rgba(255,255,255,0.05); border-radius:8px; text-align:center; font-size:22px; color:#d4a574; min-height:48px;"></div>
+            </div>
+          </div>
+
+          <!-- Image Upload (journal & keychain only) -->
+          <div class="demo-control-group" id="uploadGroup">
+            <label>Upload Your Design <span style="font-weight:400; text-transform:none; letter-spacing:0; color:rgba(255,255,255,0.25);"> Journals & Keychains</span></label>
+            <div class="demo-upload-area" id="demoUploadArea">
+              <input type="file" id="demoFileInput" accept="image/*" style="display:none;">
+              <div class="demo-upload-content" id="demoUploadContent">
+                <div style="font-size:24px; margin-bottom:6px;">📎</div>
+                <p>Drop an image or <span style="color:var(--accent-light); text-decoration:underline; cursor:pointer;" onclick="document.getElementById('demoFileInput').click()">browse</span></p>
+                <p style="font-size:11px; color:rgba(255,255,255,0.2); margin-top:4px;">Logo, design, or artwork (PNG, JPG)</p>
+                <p style="font-size:10px; color:rgba(255,255,255,0.15); margin-top:2px;">This is a preview. We'll perfect your design before engraving</p>
+              </div>
+              <div class="demo-upload-preview" id="demoUploadPreview" style="display:none;">
+                <img id="demoUploadThumb" src="" alt="Uploaded design">
+                <button onclick="clearUpload()" style="position:absolute; top:4px; right:4px; width:24px; height:24px; border-radius:50%; background:rgba(0,0,0,0.6); border:none; color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
+              </div>
+            </div>
+            <!-- Image controls (shown after upload) -->
+            <div class="demo-img-controls" id="demoImgControls" style="display:none;">
+              <div class="img-control-row">
+                <label>Rotation</label>
+                <input type="range" min="-180" max="180" value="0" class="demo-slider" id="imgRotSlider" oninput="updateImgRotation(this.value)">
+                <span class="rotation-deg" id="imgRotDeg">0°</span>
+              </div>
+              <p style="font-size:11px; color:rgba(255,255,255,0.4); margin-top:4px;">Drag corners of image to resize</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Preview -->
+        <div class="demo-preview">
+          <div class="demo-preview-frame">
+            <div class="demo-preview-product">
+              <div class="demo-mockup journal" id="demoMockup">
+                <button class="demo-reset-btn" id="demoResetBtn" onclick="resetPositions()">↺ Center</button>
+                <div id="demoEngraveImgWrap" class="demo-draggable" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60%; display:none; z-index:1;">
+                  <img id="demoEngraveImg" src="" alt="" style="width:100%; height:auto; object-fit:contain; display:block;">
+                  <div class="resize-handle resize-handle-tl" data-target="demoEngraveImgWrap" style="position:absolute;top:-5px;left:-5px;width:12px;height:12px;background:rgba(212,165,116,0.8);border-radius:50%;cursor:nw-resize;z-index:10;"></div>
+                  <div class="resize-handle resize-handle-tr" data-target="demoEngraveImgWrap" style="position:absolute;top:-5px;right:-5px;width:12px;height:12px;background:rgba(212,165,116,0.8);border-radius:50%;cursor:ne-resize;z-index:10;"></div>
+                  <div class="resize-handle resize-handle-bl" data-target="demoEngraveImgWrap" style="position:absolute;bottom:-5px;left:-5px;width:12px;height:12px;background:rgba(212,165,116,0.8);border-radius:50%;cursor:sw-resize;z-index:10;"></div>
+                  <div class="resize-handle resize-handle-br" data-target="demoEngraveImgWrap" style="position:absolute;bottom:-5px;right:-5px;width:12px;height:12px;background:rgba(212,165,116,0.8);border-radius:50%;cursor:se-resize;z-index:10;"></div>
+                </div>
+                <div class="demo-engrave-text demo-draggable" id="demoEngraveText" style="font-family:'Playfair Display',serif; color:#8a7560;">
+                  Limitless
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-preview-label">Live preview, this is how your engraving will look</div>
+        </div>
+      </div>
+
+      <div class="demo-cta">
+        <p style="color:rgba(255,255,255,0.5); font-size:15px; margin-bottom:16px;">Love what you see?</p>
+        <a href="#products" class="btn btn-primary">Shop This Product</a>
+        <a href="custom.html" class="btn btn-outline" style="margin-left:10px;">Request Custom Order</a>
+        <p style="color:rgba(255,255,255,0.35); font-size:13px; margin-top:20px; max-width:500px; line-height:1.6; margin-left:auto; margin-right:auto; text-align:center;">
+          If your image doesn't display perfectly in the preview (background not fully removed, sizing looks off, etc.), don't worry. Just include a description of what you want when you order, and our team will make sure your final product looks exactly right. You can also <a href="index.html#contact" style="color:var(--accent);">reach out to us</a> anytime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section products" id="products">
+    <div class="container">
+      <p class="section-eyebrow">Our Products</p>
+      <h2 class="section-title">Shop Our Collection</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Each piece is made to order and engraved with care. Custom engraving is included in every price, never an add-on.</p>
+      <div class="product-grid">
+        <div class="product-card" onclick="window.location='product.html#journal-pen-holder'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0009.jpg" alt="Journal with Pen Holder" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Journal - With Pen Holder</h3>
+            <p class="product-desc">Personalized leather journal with built-in pen holder. Perfect for gifts, faith, or daily reflection.</p>
+            <div class="product-bottom"><span class="product-price">$18.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Journal (Pen Holder)', 18)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#journal-standard'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0004.jpg" alt="Journal without Pen Holder" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Journal - Without Pen Holder</h3>
+            <p class="product-desc">Classic leather journal with custom engraving. Clean, simple, and beautifully personal.</p>
+            <div class="product-bottom"><span class="product-price">$15.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Journal (Standard)', 15)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#water-bottle'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0001.jpg" alt="Stainless Steel Water Bottle" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Water Bottle</h3>
+            <p class="product-desc">Stainless steel bottle with custom engraving. Durable, personal, and built to last.</p>
+            <div class="product-bottom"><span class="product-price">$23.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Water Bottle', 23)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#necklace-silver'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0018.jpg" alt="Silver Bar Necklace" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Bar Necklace - Silver</h3>
+            <p class="product-desc">Silver bar necklace with custom text. A meaningful, wearable keepsake.</p>
+            <div class="product-bottom"><span class="product-price">$15.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Bar Necklace (Silver)', 15)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#necklace-gold'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0016.jpg" alt="Gold Bar Necklace" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Bar Necklace - Gold</h3>
+            <p class="product-desc">Gold bar necklace with custom text. Elegant, eye-catching, and completely yours.</p>
+            <div class="product-bottom"><span class="product-price">$20.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Bar Necklace (Gold)', 20)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#bracelet-silver'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0029.jpg" alt="Silver Chain Bracelet" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Chain Bracelet - Silver</h3>
+            <p class="product-desc">Engraved silver bar chain bracelet. Subtle, elegant, and completely personal.</p>
+            <div class="product-bottom"><span class="product-price">$10.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Chain Bracelet (Silver)', 10)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#bracelet-gold'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0028.jpg" alt="Gold Chain Bracelet" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Chain Bracelet - Gold</h3>
+            <p class="product-desc">Engraved gold bar chain bracelet. Warm, bold, and beautifully personal.</p>
+            <div class="product-bottom"><span class="product-price">$15.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Chain Bracelet (Gold)', 15)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#keychain'" style="cursor:pointer">
+          <div class="product-img"><img src="images/BRAND_AWESOMENESS_0025.jpg" alt="Custom Keychain" loading="lazy"></div>
+          <div class="product-info">
+            <h3>Keychain</h3>
+            <p class="product-desc">Custom engraved dog tag keychain with charm. Carry something meaningful everywhere you go.</p>
+            <div class="product-bottom"><span class="product-price">$10.00</span><button class="btn btn-sm" onclick="event.stopPropagation(); quickAddToCart('Keychain', 10)">Add to Cart</button></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="window.location='product.html#business-cards'" style="cursor:pointer">
+          <div class="product-img"><img src="images/business-cards-3.png" alt="Metal Business Cards" loading="lazy" style="object-fit: contain; background: #f5f5f5;"></div>
+          <div class="product-info">
+            <h3>Metal Business Cards</h3>
+            <p class="product-desc">Laser engraved metal business cards. Premium thick ($2.25/card) or standard thin ($1.25/card) with bulk discounts.</p>
+            <div class="product-bottom"><span class="product-price">From $1.25/card</span><button class="btn btn-sm" onclick="event.stopPropagation(); window.location='product.html#business-cards'">View Details</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM CTA -->
+  <section class="custom-cta">
+    <div class="container custom-cta-inner">
+      <div class="custom-cta-text">
+        <h2>Have something else in mind?</h2>
+        <p>We engrave on almost anything: business cards, cutting boards, phone cases, pet tags, tumblers, you name it. Send in your own item or tell us your idea and we'll make it happen.</p>
+      </div>
+      <a href="custom.html" class="btn btn-primary">Request a Custom Order</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container about-grid">
+      <div class="about-img"><img src="images/BRAND_AWESOMENESS_0010.jpg" alt="Engraved journal" loading="lazy"></div>
+      <div class="about-text">
+        <p class="section-eyebrow">Who We Are</p>
+        <h2 class="section-title">Made Personal.<br>Made to Last.</h2>
+        <p>Limitless Engraving exists to turn everyday items into personal, meaningful pieces that tell someone's story, celebrate their community, or represent their brand.</p>
+        <p>Based in Arizona, we combine precise laser engraving with thoughtful design so every piece feels intentional and built to last.</p>
+        <a href="custom.html" class="btn btn-primary" style="margin-top:24px;">Work With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section process">
+    <div class="container">
+      <p class="section-eyebrow" style="color:var(--accent-light);">How It Works</p>
+      <h2 class="section-title">Our Process</h2>
+      <div class="process-grid">
+        <div class="process-step"><div class="process-num">01</div><h3>Select Your Product</h3><p>Explore our curated collection of customizable items. Find the piece that matches your vision.</p></div>
+        <div class="process-step"><div class="process-num">02</div><h3>Share Your Design</h3><p>Upload your artwork, logo, or idea, or work with our team for custom design assistance.</p></div>
+        <div class="process-step"><div class="process-num">03</div><h3>Precision Engraving</h3><p>We bring your design to life with advanced laser technology. Durable, beautiful, and personal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="section gallery-preview">
+    <div class="container">
+      <p class="section-eyebrow">Our Work</p>
+      <h2 class="section-title">Recent Projects</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0004.jpg" alt="Custom engraving" loading="lazy"></div>
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0009.jpg" alt="Custom engraving" loading="lazy"></div>
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0013.jpg" alt="Custom engraving" loading="lazy"></div>
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0022.jpg" alt="Custom engraving" loading="lazy"></div>
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0024.jpg" alt="Custom engraving" loading="lazy"></div>
+        <div class="gallery-item"><img src="images/BRAND_AWESOMENESS_0030.jpg" alt="Custom engraving" loading="lazy"></div>
+      </div>
+      <div style="text-align:center; margin-top:40px;"><a href="gallery.html" class="btn btn-outline" style="color:var(--navy); border-color:var(--navy);">View Full Gallery</a></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials">
+    <div class="container">
+      <p class="section-eyebrow">What People Say</p>
+      <h2 class="section-title">Customer Reviews</h2>
+      <div class="testimonial-grid" style="display:flex; justify-content:center;">
+        <div class="testimonial-card" style="max-width:600px; width:100%; text-align:center; padding:40px;">
+          <div class="stars" style="font-size:24px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p style="font-size:20px; line-height:1.6; margin:20px 0;">"Limitless Engraving is my go-to for my laser engraving needs."</p>
+          <div class="testimonial-author" style="font-size:15px;">Kevin, Co-Founder, The Vox Company</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <p class="section-eyebrow">Questions?</p>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What services do you offer?<span class="faq-icon">+</span></button><div class="faq-a"><p>We specialize in custom laser engraving on everyday items like keychains, stainless steel water bottles, jewelry, journals, business cards, and home goods.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I get started?<span class="faq-icon">+</span></button><div class="faq-a"><p>Browse our shop and choose the product that best fits your vision, then reach out through our contact form or custom order page with your details.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What makes you different?<span class="faq-icon">+</span></button><div class="faq-a"><p>We focus on combining precise laser engraving with thoughtful design, so every piece feels personal, intentional, and built to last.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's your pricing?<span class="faq-icon">+</span></button><div class="faq-a"><p>Our pricing is based on the product you choose, the level of customization, and the quantity, with clear per-item pricing shown in the shop. Bulk discounts are available.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How long does it take?<span class="faq-icon">+</span></button><div class="faq-a"><p>Most orders are completed within 24–48 hours. Custom and bulk orders may take 3–5 business days depending on complexity.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you ship nationwide?<span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, we ship across the United States. Local pickup is also available in Arizona.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <p class="section-eyebrow">Get in Touch</p>
+      <h2 class="section-title">Let's Create Something</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Have a question, custom request, or ready to order? Drop us a message.</p>
+      <form class="contact-form" id="contactForm" onsubmit="submitContactForm(event)">
+        <div class="form-row">
+          <div class="form-group"><label for="c-name">Name</label><input type="text" id="c-name" name="name" required placeholder="Your name"></div>
+          <div class="form-group"><label for="c-email">Email</label><input type="email" id="c-email" name="email" required placeholder="your@email.com"></div>
+        </div>
+        <div class="form-group">
+          <label for="c-subject">Subject</label>
+          <select id="c-subject" name="subject"><option value="">Select a topic</option><option value="Product Order">Product Order</option><option value="Custom Design">Custom Design Request</option><option value="Bulk Order">Bulk / Corporate Order</option><option value="Question">General Question</option></select>
+        </div>
+        <div class="form-group"><label for="c-message">Message</label><textarea id="c-message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea></div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <p id="contactSuccess" style="display:none; text-align:center; color:#4caf50; margin-top:16px; font-weight:500;">Message sent! We'll get back to you within 24 hours.</p>
+      </form>
+      <script>
+        function submitContactForm(e) {
+          e.preventDefault();
+          const name = document.getElementById('c-name').value;
+          const email = document.getElementById('c-email').value;
+          const subject = document.getElementById('c-subject').value || 'General Inquiry';
+          const message = document.getElementById('c-message').value;
+          const mailto = `mailto:limitlessengravingco@gmail.com?subject=${encodeURIComponent(subject + ' | From ' + name)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+          window.open(mailto, '_blank');
+          document.getElementById('contactForm').reset();
+          document.getElementById('contactSuccess').style.display = 'block';
+          setTimeout(() => { document.getElementById('contactSuccess').style.display = 'none'; }, 5000);
+        }
+      </script>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo-icon.png" alt="Limitless Engraving" height="40" style="filter: brightness(100);">
+        <p>Turning everyday items into personal, meaningful pieces.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#products">Shop</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="custom.html">Custom Orders</a>
+        <a href="bulk.html">Bulk Orders</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="mailto:limitlessengravingco@gmail.com">limitlessengravingco@gmail.com</a>
+        <a href="https://instagram.com/limitless_engraving" target="_blank">@limitless_engraving</a>
+        <p style="color:#888; font-size:13px; margin-top:4px;">Arizona, US</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p>&copy; 2026 Limitless Engraving. All rights reserved.</p></div></div>
+  </footer>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart(); closeCustomizeModal();"></div>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" onclick="closeCart()">&times;</button>
+    </div>
+    <div class="cart-empty" id="cartEmpty">
+      <p>Your cart is empty</p>
+      <p style="font-size:13px; color:var(--text-light); margin-top:4px;">Add products from the shop or customize in the demo above.</p>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="cartCheckoutBtn" onclick="cartCheckout()" style="display:none;">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Customize Modal -->
+  <div class="customize-modal" id="customizeModal">
+    <div class="customize-modal-inner">
+      <div class="customize-modal-header">
+        <h3>Customize Your <span id="modalProductName">Product</span></h3>
+        <button onclick="closeCustomizeModal()" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-light);">&times;</button>
+      </div>
+      <div class="form-group">
+        <label for="modalEngravingText">Engraving Text</label>
+        <input type="text" id="modalEngravingText" placeholder="What should it say?">
+      </div>
+      <div class="form-group">
+        <label>Font Style</label>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="modal-font-btn active" data-fontname="Elegant" onclick="document.querySelectorAll('.modal-font-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="font-family:'Playfair Display',serif;">Abc</button>
+          <button class="modal-font-btn" data-fontname="Script" onclick="document.querySelectorAll('.modal-font-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="font-family:'Sacramento',cursive; font-size:18px;">Abc</button>
+          <button class="modal-font-btn" data-fontname="Block" onclick="document.querySelectorAll('.modal-font-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="font-family:'Bebas Neue',sans-serif; letter-spacing:2px;">ABC</button>
+          <button class="modal-font-btn" data-fontname="Handwritten" onclick="document.querySelectorAll('.modal-font-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="font-family:'Caveat',cursive; font-size:18px;">Abc</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="submitCustomizeModal()">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Cart Toast -->
+  <div class="cart-toast" id="cartToast"></div>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // ===== INTERACTIVE DEMO =====
+    let currentFont = "'Playfair Display', serif";
+    window.currentEngraveColor = '#8a7560'; // default for journal
+
+    // Product color options
+    const productColorOptions = {
+      journal: [
+        { name: 'Tan', bg: 'linear-gradient(145deg, #c8a882, #b08660)', spine: '#8b6340' },
+        { name: 'Black', bg: 'linear-gradient(145deg, #3a3a3a, #222)', spine: '#111' },
+        { name: 'Brown', bg: 'linear-gradient(145deg, #8b5e3c, #6b3a1f)', spine: '#4a2810' },
+        { name: 'Blush', bg: 'linear-gradient(145deg, #d4a0a0, #c08080)', spine: '#a06060' },
+        { name: 'Navy', bg: 'linear-gradient(145deg, #3a4a5c, #2a3644)', spine: '#1a2630' },
+        { name: 'Grey', bg: 'linear-gradient(145deg, #9a9a9a, #777)', spine: '#555' },
+      ],
+      bottle: [
+        { name: 'Black', bg: '#222', svgColors: { dark: '#1a1a1a', mid1: '#252525', mid2: '#363636', light: '#404040' } },
+        { name: 'White', bg: '#eee', svgColors: { dark: '#cccccc', mid1: '#d8d8d8', mid2: '#e5e5e5', light: '#f0f0f0' } },
+        { name: 'Navy', bg: '#2a3a4a', svgColors: { dark: '#1a2a3a', mid1: '#253545', mid2: '#304050', light: '#3a4a5a' } },
+        { name: 'Red', bg: '#8b2020', svgColors: { dark: '#5a1010', mid1: '#701818', mid2: '#882222', light: '#9a2a2a' } },
+        { name: 'Green', bg: '#2a4a2a', svgColors: { dark: '#1a3a1a', mid1: '#254025', mid2: '#305030', light: '#3a5a3a' } },
+      ],
+      necklace: [
+        { name: 'Gold', bg: 'linear-gradient(135deg, #d4a574, #c9956b)', chain: '#d4a574' },
+        { name: 'Silver', bg: 'linear-gradient(135deg, #c0c0c0, #999)', chain: '#b0b0b0' },
+      ],
+      bracelet: [
+        { name: 'Gold', bg: 'linear-gradient(135deg, #d4a574, #b8860b)', ring: '#d4a574' },
+        { name: 'Silver', bg: 'linear-gradient(135deg, #c0c0c0, #888)', ring: '#b0b0b0' },
+      ],
+      keychain: [
+        { name: 'Black', bg: '#333', svgColors: { dark: '#2a2a2a', mid: '#444', light: '#4a4a4a' } },
+      ],
+      cards: [
+        { name: 'Black', bg: '#333', svgColors: { fill: '#2a2a2a', edge: '#1a1a1a', shadow: '#111' } },
+      ],
+      cards_metal: [
+        { name: 'Black', bg: '#333', svgColors: { fill: '#2a2a2a', edge: '#1a1a1a', shadow: '#111' } },
+      ]
+    };
+
+    function renderProductColors(product) {
+      const container = document.getElementById('productColors');
+      const colors = productColorOptions[product] || [];
+      container.innerHTML = '';
+      colors.forEach((c, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'demo-pcolor-wrap';
+        const btn = document.createElement('button');
+        btn.className = 'demo-pcolor-btn' + (i === 0 ? ' active' : '');
+        btn.style.background = c.bg;
+        btn.onclick = () => applyProductColor(product, c, btn);
+        const label = document.createElement('div');
+        label.className = 'demo-pcolor-label';
+        label.textContent = c.name;
+        wrap.appendChild(btn);
+        wrap.appendChild(label);
+        container.appendChild(wrap);
+      });
+      // Apply first color by default
+      if (colors.length) applyProductColor(product, colors[0], container.querySelector('.demo-pcolor-btn'));
+    }
+
+    function applyProductColor(product, color, btn) {
+      document.querySelectorAll('.demo-pcolor-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mockup = document.getElementById('demoMockup');
+
+      if (product === 'journal') {
+        // Journal uses CSS background
+        mockup.style.background = color.bg;
+        if (color.spine) mockup.style.boxShadow = '-4px 0 0 ' + color.spine + ', 0 8px 30px rgba(0,0,0,0.3)';
+      } else if (product === 'bottle') {
+        // Bottle: update SVG gradient colors
+        mockup.style.background = 'none';
+        const svg = mockup.querySelector('.product-svg');
+        if (svg && color.svgColors) {
+          const c = color.svgColors;
+          svg.querySelector('#bBody stop:nth-child(1)').setAttribute('stop-color', c.dark);
+          svg.querySelector('#bBody stop:nth-child(2)').setAttribute('stop-color', c.mid1);
+          svg.querySelector('#bBody stop:nth-child(3)').setAttribute('stop-color', c.mid2);
+          svg.querySelector('#bBody stop:nth-child(4)').setAttribute('stop-color', c.light);
+          svg.querySelector('#bBody stop:nth-child(5)').setAttribute('stop-color', c.mid2);
+          svg.querySelector('#bBody stop:nth-child(6)').setAttribute('stop-color', c.mid1);
+          svg.querySelector('#bBody stop:nth-child(7)').setAttribute('stop-color', c.dark);
+          svg.querySelector('#bCap stop:nth-child(1)').setAttribute('stop-color', c.dark);
+          svg.querySelector('#bCap stop:nth-child(2)').setAttribute('stop-color', c.mid2);
+          svg.querySelector('#bCap stop:nth-child(3)').setAttribute('stop-color', c.mid1);
+          svg.querySelector('#bCap stop:nth-child(4)').setAttribute('stop-color', c.dark);
+          svg.querySelector('#bBottom stop:nth-child(1)').setAttribute('stop-color', c.mid1);
+          svg.querySelector('#bBottom stop:nth-child(2)').setAttribute('stop-color', c.dark);
+        }
+      } else if (product === 'necklace' || product === 'bracelet') {
+        // Chain-based: use CSS variables
+        mockup.style.background = 'none';
+        if (color.chain) {
+          mockup.style.setProperty('--chain-color', color.chain);
+          const highlight = lightenColor(color.chain, 30);
+          const shadow = darkenColor(color.chain, 20);
+          mockup.style.setProperty('--chain-highlight', highlight);
+          mockup.style.setProperty('--chain-shadow', shadow);
+        }
+        if (color.ring) {
+          mockup.style.setProperty('--ring-color', color.ring);
+          mockup.style.setProperty('--chain-color', color.ring);
+          const highlight = lightenColor(color.ring, 30);
+          const shadow = darkenColor(color.ring, 20);
+          mockup.style.setProperty('--chain-highlight', highlight);
+          mockup.style.setProperty('--chain-shadow', shadow);
+        }
+        // Re-inject SVG to pick up new CSS variables
+        const existingSvg = mockup.querySelector('.product-svg');
+        if (existingSvg) existingSvg.remove();
+        if (productSVGs[product]) mockup.insertAdjacentHTML('afterbegin', productSVGs[product]);
+      } else if (product === 'keychain') {
+        // Keychain: update SVG gradient
+        mockup.style.background = 'none';
+        const svg = mockup.querySelector('.product-svg');
+        if (svg && color.svgColors) {
+          const c = color.svgColors;
+          svg.querySelector('#kTag stop:nth-child(1)').setAttribute('stop-color', c.dark);
+          svg.querySelector('#kTag stop:nth-child(2)').setAttribute('stop-color', c.mid);
+          svg.querySelector('#kTag stop:nth-child(3)').setAttribute('stop-color', c.light);
+          svg.querySelector('#kTag stop:nth-child(4)').setAttribute('stop-color', c.mid);
+          svg.querySelector('#kTag stop:nth-child(5)').setAttribute('stop-color', c.dark);
+        }
+      } else if (product === 'cards' || product === 'cards_metal') {
+        // Cards: re-inject SVG with new colors baked in
+        mockup.style.background = 'none';
+        if (color.svgColors) {
+          const c = color.svgColors;
+          const existingSvg = mockup.querySelector('.product-svg');
+          if (existingSvg) existingSvg.remove();
+          // Get the right SVG template
+          let svgStr = currentCardMaterial === 'metal' ? getMetalCardSVG() : productSVGs.cards;
+          // Replace colors in the SVG string
+          if (currentCardMaterial === 'metal') {
+            svgStr = svgStr.replace(/#d0d0d0/g, c.fill).replace(/#c0c0c0/g, c.fill)
+              .replace(/#b8b8b8/g, c.edge).replace(/#aaa/g, c.edge)
+              .replace(/#888/g, c.shadow);
+          } else {
+            svgStr = svgStr.replace(/#d0b080/g, c.fill).replace(/#c0a060/g, c.edge)
+              .replace(/#b09050/g, c.shadow);
+          }
+          mockup.insertAdjacentHTML('afterbegin', svgStr);
+        }
+      }
+
+      // Update engraving text color based on product + color
+      updateEngraveTextColor(product, color.name);
+    }
+
+    function updateEngraveTextColor(product, colorName) {
+      let engraveColor = '#8a7560'; // default warm brown for journals
+      if (product === 'cards' || product === 'cards_metal') {
+        engraveColor = '#c0c0c0'; // silver on black cards
+      } else if (product === 'necklace' || product === 'bracelet') {
+        if (colorName === 'Gold') {
+          engraveColor = '#3a2a1a'; // dark gold/black on gold
+        } else if (colorName === 'Silver') {
+          engraveColor = '#2a2a2a'; // silver/black on silver
+        }
+      } else if (product === 'keychain') {
+        engraveColor = '#c0c0c0'; // silver on black keychain
+      } else if (product === 'bottle') {
+        engraveColor = '#c0c0c0'; // silver/light on bottles
+      }
+      // Apply to main text and all extra text lines
+      const mainText = document.getElementById('demoEngraveText');
+      if (mainText) mainText.style.color = engraveColor;
+      document.querySelectorAll('.demo-extra-text').forEach(el => {
+        el.style.color = engraveColor;
+      });
+      // Store for new text lines
+      window.currentEngraveColor = engraveColor;
+    }
+
+    // Helper to lighten/darken hex colors
+    function lightenColor(hex, percent) {
+      const num = parseInt(hex.replace('#',''), 16);
+      const r = Math.min(255, (num >> 16) + Math.round(255 * percent / 100));
+      const g = Math.min(255, ((num >> 8) & 0x00FF) + Math.round(255 * percent / 100));
+      const b = Math.min(255, (num & 0x0000FF) + Math.round(255 * percent / 100));
+      return '#' + (0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1);
+    }
+    function darkenColor(hex, percent) {
+      const num = parseInt(hex.replace('#',''), 16);
+      const r = Math.max(0, (num >> 16) - Math.round(255 * percent / 100));
+      const g = Math.max(0, ((num >> 8) & 0x00FF) - Math.round(255 * percent / 100));
+      const b = Math.max(0, (num & 0x0000FF) - Math.round(255 * percent / 100));
+      return '#' + (0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1);
+    }
+
+    const productSizes = {
+      journal:  { w: '280px', h: '380px' },
+      bottle:   { w: '180px', h: '420px' },
+      necklace: { w: '300px', h: '380px' },
+      bracelet: { w: '300px', h: '140px' },
+      keychain: { w: '200px', h: '360px' },
+      cards:    { w: '320px', h: '200px' }
+    };
+
+    const productSVGs = {
+      bottle: `<svg class="product-svg" viewBox="0 0 180 440" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a1a1a"/><stop offset="12%" stop-color="#252525"/>
+            <stop offset="30%" stop-color="#363636"/><stop offset="45%" stop-color="#404040"/>
+            <stop offset="55%" stop-color="#3a3a3a"/><stop offset="75%" stop-color="#2a2a2a"/>
+            <stop offset="100%" stop-color="#1a1a1a"/>
+          </linearGradient>
+          <linearGradient id="bCap" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1e1e1e"/><stop offset="40%" stop-color="#383838"/>
+            <stop offset="60%" stop-color="#333"/><stop offset="100%" stop-color="#1e1e1e"/>
+          </linearGradient>
+          <linearGradient id="bShine" x1="0.35" y1="0" x2="0.65" y2="0">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="50%" stop-color="rgba(255,255,255,0.07)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <linearGradient id="bBottom" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a2a2a"/><stop offset="100%" stop-color="#181818"/>
+          </linearGradient>
+        </defs>
+        <!-- Carry loop -->
+        <path d="M72,18 Q72,2 90,2 Q108,2 108,18" stroke="#3a3a3a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M72,18 Q72,2 90,2 Q108,2 108,18" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Cap -->
+        <rect x="60" y="18" width="60" height="55" rx="8" fill="url(#bCap)"/>
+        <!-- Cap grip ridges -->
+        <rect x="64" y="26" width="52" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+        <rect x="64" y="33" width="52" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+        <rect x="64" y="40" width="52" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+        <rect x="64" y="47" width="52" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+        <rect x="64" y="54" width="52" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+        <!-- Neck -->
+        <path d="M64,73 L64,95 C42,110 30,135 30,155 L150,155 C150,135 138,110 116,95 L116,73 Z" fill="url(#bBody)"/>
+        <!-- Body -->
+        <rect x="30" y="155" width="120" height="240" rx="6" fill="url(#bBody)"/>
+        <!-- Bottom base -->
+        <rect x="30" y="380" width="120" height="20" rx="6" fill="url(#bBottom)"/>
+        <!-- Bottom ring line -->
+        <line x1="30" y1="380" x2="150" y2="380" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <!-- Body shine -->
+        <rect x="30" y="155" width="120" height="240" rx="6" fill="url(#bShine)"/>
+        <!-- Left edge highlight -->
+        <line x1="30" y1="160" x2="30" y2="395" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <!-- Matte texture dots -->
+        <circle cx="70" cy="200" r="0.5" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="100" cy="220" r="0.5" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="85" cy="280" r="0.5" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="110" cy="320" r="0.5" fill="rgba(255,255,255,0.03)"/>
+      </svg>`,
+
+      necklace: `<svg class="product-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nPendant" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--chain-highlight, #e8c9a0)"/>
+            <stop offset="40%" stop-color="var(--chain-color, #d4a574)"/>
+            <stop offset="100%" stop-color="var(--chain-shadow, #b8855a)"/>
+          </linearGradient>
+          <filter id="nShadow"><feDropShadow dx="1" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+        </defs>
+        <!-- Left chain with link detail -->
+        <path d="M95,0 C92,30 86,80 82,130 Q78,180 80,220 Q82,260 92,295 Q100,315 125,330"
+          stroke="var(--chain-color, #d4a574)" stroke-width="2" fill="none"/>
+        <!-- Left chain link ovals -->
+        <ellipse cx="92" cy="25" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-3 92 25)"/>
+        <ellipse cx="89" cy="55" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-5 89 55)"/>
+        <ellipse cx="86" cy="90" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-7 86 90)"/>
+        <ellipse cx="83" cy="130" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-4 83 130)"/>
+        <ellipse cx="80" cy="170" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(0 80 170)"/>
+        <ellipse cx="80" cy="210" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(3 80 210)"/>
+        <ellipse cx="84" cy="250" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(8 84 250)"/>
+        <ellipse cx="95" cy="285" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(18 95 285)"/>
+        <!-- Right chain with link detail -->
+        <path d="M205,0 C208,30 214,80 218,130 Q222,180 220,220 Q218,260 208,295 Q200,315 175,330"
+          stroke="var(--chain-color, #d4a574)" stroke-width="2" fill="none"/>
+        <ellipse cx="208" cy="25" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(3 208 25)"/>
+        <ellipse cx="211" cy="55" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(5 211 55)"/>
+        <ellipse cx="214" cy="90" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(7 214 90)"/>
+        <ellipse cx="217" cy="130" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(4 217 130)"/>
+        <ellipse cx="220" cy="170" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(0 220 170)"/>
+        <ellipse cx="220" cy="210" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-3 220 210)"/>
+        <ellipse cx="216" cy="250" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-8 216 250)"/>
+        <ellipse cx="205" cy="285" rx="2.5" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-18 205 285)"/>
+        <!-- Chain shine -->
+        <path d="M95,0 C92,30 86,80 82,130 Q78,180 80,220 Q82,260 92,295 Q100,315 125,330"
+          stroke="var(--chain-highlight, #e8c9a0)" stroke-width="0.5" fill="none" stroke-dasharray="3,8" opacity="0.4"/>
+        <path d="M205,0 C208,30 214,80 218,130 Q222,180 220,220 Q218,260 208,295 Q200,315 175,330"
+          stroke="var(--chain-highlight, #e8c9a0)" stroke-width="0.5" fill="none" stroke-dasharray="3,8" opacity="0.4"/>
+        <!-- Connector holes -->
+        <circle cx="128" cy="332" r="2.5" fill="var(--chain-shadow, #b8855a)"/>
+        <circle cx="172" cy="332" r="2.5" fill="var(--chain-shadow, #b8855a)"/>
+        <!-- Bar pendant -->
+        <rect x="90" y="326" width="120" height="28" rx="4" fill="url(#nPendant)" filter="url(#nShadow)"/>
+        <!-- Pendant top shine -->
+        <rect x="90" y="326" width="120" height="8" rx="4" fill="rgba(255,255,255,0.15)"/>
+        <!-- Pendant bottom edge -->
+        <rect x="90" y="351" width="120" height="1.5" rx="0.5" fill="rgba(0,0,0,0.12)"/>
+      </svg>`,
+
+      keychain: `<svg class="product-svg" viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="kTag" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="25%" stop-color="#444"/>
+            <stop offset="50%" stop-color="#4a4a4a"/><stop offset="75%" stop-color="#3e3e3e"/>
+            <stop offset="100%" stop-color="#2a2a2a"/>
+          </linearGradient>
+          <linearGradient id="kShine" x1="0.3" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.1)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <filter id="kShadow"><feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.4"/></filter>
+        </defs>
+        <!-- Key ring -->
+        <circle cx="100" cy="40" r="28" stroke="#888" stroke-width="5" fill="none"/>
+        <circle cx="100" cy="40" r="28" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+        <!-- Ring opening detail -->
+        <path d="M72,40 Q72,38 74,38" stroke="#888" stroke-width="3" fill="none"/>
+        <!-- Cross charm -->
+        <rect x="130" y="55" width="4" height="25" rx="1" fill="#666"/>
+        <rect x="125" y="62" width="14" height="4" rx="1" fill="#666"/>
+        <rect x="130" y="55" width="4" height="25" rx="1" fill="rgba(255,255,255,0.08)"/>
+        <!-- Small chain links connecting ring to tag -->
+        <ellipse cx="100" cy="72" rx="4" ry="6" stroke="#777" stroke-width="2" fill="none"/>
+        <ellipse cx="100" cy="86" rx="4" ry="6" stroke="#777" stroke-width="2" fill="none"/>
+        <!-- Connector -->
+        <rect x="95" y="94" width="10" height="14" rx="3" fill="#555"/>
+        <!-- Dog tag body -->
+        <rect x="50" y="108" width="100" height="170" rx="14" fill="url(#kTag)" filter="url(#kShadow)"/>
+        <!-- Tag edge bevel -->
+        <rect x="52" y="110" width="96" height="166" rx="12" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <!-- Tag shine -->
+        <rect x="50" y="108" width="100" height="170" rx="14" fill="url(#kShine)"/>
+        <!-- Matte surface texture -->
+        <rect x="55" y="115" width="90" height="155" rx="10" fill="rgba(255,255,255,0.02)"/>
+        <!-- Hole at top -->
+        <circle cx="100" cy="120" r="5" fill="#222" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+      </svg>`,
+
+      bracelet: `<svg class="product-svg" viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="brBar" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--chain-highlight, #e8c9a0)"/>
+            <stop offset="40%" stop-color="var(--chain-color, #d4a574)"/>
+            <stop offset="100%" stop-color="var(--chain-shadow, #b8855a)"/>
+          </linearGradient>
+          <filter id="brShadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.25"/></filter>
+        </defs>
+        <!-- Left chain -->
+        <path d="M10,70 Q30,70 50,70 Q70,70 85,70" stroke="var(--chain-color, #d4a574)" stroke-width="3" fill="none"/>
+        <!-- Left chain links -->
+        <ellipse cx="25" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="42" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="60" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="78" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <!-- Bar pendant -->
+        <rect x="90" y="52" width="120" height="36" rx="5" fill="url(#brBar)" filter="url(#brShadow)"/>
+        <rect x="90" y="52" width="120" height="10" rx="5" fill="rgba(255,255,255,0.12)"/>
+        <rect x="90" y="84" width="120" height="1.5" rx="0.5" fill="rgba(0,0,0,0.1)"/>
+        <!-- Connector dots -->
+        <circle cx="92" cy="70" r="2" fill="var(--chain-shadow, #b8855a)"/>
+        <circle cx="208" cy="70" r="2" fill="var(--chain-shadow, #b8855a)"/>
+        <!-- Right chain -->
+        <path d="M215,70 Q235,70 255,70 Q275,70 290,70" stroke="var(--chain-color, #d4a574)" stroke-width="3" fill="none"/>
+        <!-- Right chain links -->
+        <ellipse cx="222" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="240" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="258" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="275" cy="70" rx="6" ry="4" stroke="var(--chain-color, #d4a574)" stroke-width="1.2" fill="none"/>
+        <!-- Clasp -->
+        <circle cx="10" cy="70" r="6" stroke="var(--chain-color, #d4a574)" stroke-width="2" fill="none"/>
+        <rect x="286" y="64" width="10" height="12" rx="3" fill="var(--chain-color, #d4a574)"/>
+      </svg>`,
+
+      cards: `<svg class="product-svg" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d0b080"/>
+            <stop offset="100%" stop-color="#c0a060"/>
+          </linearGradient>
+          <linearGradient id="cShine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
+            <stop offset="40%" stop-color="rgba(255,255,255,0.03)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <filter id="cShadow"><feDropShadow dx="2" dy="4" stdDeviation="6" flood-opacity="0.35"/></filter>
+        </defs>
+        <!-- Stacked card behind (offset) -->
+        <rect x="18" y="14" width="280" height="170" rx="8" fill="#b09050" opacity="0.35"/>
+        <!-- Main card body -->
+        <rect x="10" y="8" width="280" height="170" rx="8" fill="url(#cFill)" filter="url(#cShadow)"/>
+        <!-- Card edge detail -->
+        <rect x="12" y="10" width="276" height="166" rx="7" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <!-- Inner border line -->
+        <rect x="22" y="20" width="256" height="146" rx="4" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="0.5" stroke-dasharray="4,3"/>
+        <!-- Top shine -->
+        <rect x="10" y="8" width="280" height="170" rx="8" fill="url(#cShine)"/>
+        <!-- Paper texture lines -->
+        <line x1="30" y1="55" x2="270" y2="55" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+        <line x1="30" y1="75" x2="270" y2="75" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+        <line x1="30" y1="95" x2="270" y2="95" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+        <line x1="30" y1="115" x2="270" y2="115" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+        <line x1="30" y1="135" x2="200" y2="135" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>
+        <!-- Corner accent -->
+        <path d="M270,168 L280,168 L280,158" stroke="rgba(0,0,0,0.06)" stroke-width="0.8" fill="none"/>
+        <!-- Bottom edge shadow -->
+        <rect x="10" y="172" width="280" height="3" rx="1" fill="rgba(0,0,0,0.08)"/>
+        <!-- Right edge shadow -->
+        <rect x="287" y="12" width="3" height="166" rx="1" fill="rgba(0,0,0,0.06)"/>
+      </svg>`
+    };
+
+    const bottleSVG = `<svg class="bottle-svg" viewBox="0 0 160 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bottleBody" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1a1a1a"/>
+          <stop offset="15%" stop-color="#2a2a2a"/>
+          <stop offset="35%" stop-color="#3a3a3a"/>
+          <stop offset="50%" stop-color="#404040"/>
+          <stop offset="65%" stop-color="#353535"/>
+          <stop offset="85%" stop-color="#252525"/>
+          <stop offset="100%" stop-color="#1a1a1a"/>
+        </linearGradient>
+        <linearGradient id="bottleCap" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1e1e1e"/>
+          <stop offset="35%" stop-color="#3a3a3a"/>
+          <stop offset="65%" stop-color="#333"/>
+          <stop offset="100%" stop-color="#1e1e1e"/>
+        </linearGradient>
+        <linearGradient id="bottleShine" x1="0.3" y1="0" x2="0.7" y2="0">
+          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+          <stop offset="40%" stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="55%" stop-color="rgba(255,255,255,0.1)"/>
+          <stop offset="70%" stop-color="rgba(255,255,255,0.04)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+      </defs>
+      <!-- Cap -->
+      <rect x="52" y="8" width="56" height="48" rx="8" fill="url(#bottleCap)"/>
+      <rect x="55" y="14" width="50" height="2.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <rect x="55" y="21" width="50" height="2.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <rect x="55" y="28" width="50" height="2.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <rect x="55" y="35" width="50" height="2.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <rect x="55" y="42" width="50" height="2.5" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <!-- Neck taper -->
+      <path d="M56,56 L56,78 C36,90 24,112 24,130 L136,130 C136,112 124,90 104,78 L104,56 Z" fill="url(#bottleBody)"/>
+      <!-- Body -->
+      <rect x="24" y="130" width="112" height="230" rx="10" fill="url(#bottleBody)"/>
+      <!-- Bottom -->
+      <ellipse cx="80" cy="360" rx="56" ry="14" fill="#181818"/>
+      <rect x="24" y="348" width="112" height="14" fill="url(#bottleBody)"/>
+      <!-- Full body shine -->
+      <rect x="24" y="130" width="112" height="230" rx="10" fill="url(#bottleShine)"/>
+      <!-- Thin reflection line -->
+      <line x1="55" y1="135" x2="55" y2="355" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <!-- Carry loop -->
+      <path d="M65,8 Q65,-10 80,-10 Q95,-10 95,8" stroke="#3a3a3a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M65,8 Q65,-10 80,-10 Q95,-10 95,8" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>`;
+
+    const necklaceSVG = `<svg class="necklace-svg" viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="chainGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="var(--chain-color, #d4a574)"/>
+          <stop offset="50%" stop-color="var(--chain-highlight, #e8c9a0)"/>
+          <stop offset="100%" stop-color="var(--chain-color, #d4a574)"/>
+        </linearGradient>
+        <linearGradient id="pendantGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--chain-highlight, #e8c9a0)"/>
+          <stop offset="30%" stop-color="var(--chain-color, #d4a574)"/>
+          <stop offset="100%" stop-color="var(--chain-shadow, #b8855a)"/>
+        </linearGradient>
+        <linearGradient id="pendantShine" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
+          <stop offset="30%" stop-color="rgba(255,255,255,0.05)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <filter id="pendantShadow">
+          <feDropShadow dx="1" dy="4" stdDeviation="4" flood-opacity="0.35"/>
+        </filter>
+      </defs>
+      <!-- Left chain - long draping cable chain with links -->
+      <path d="M90,0 C88,20 82,60 78,100 Q74,140 76,180 Q78,220 88,260 Q98,290 120,310"
+        stroke="var(--chain-color, #d4a574)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <!-- Left chain link texture -->
+      <path d="M90,0 C88,20 82,60 78,100 Q74,140 76,180 Q78,220 88,260 Q98,290 120,310"
+        stroke="var(--chain-highlight, #e8c9a0)" stroke-width="0.6" fill="none" stroke-dasharray="2,4" opacity="0.5"/>
+      <!-- Left chain individual link ovals -->
+      <ellipse cx="88" cy="20" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-5 88 20)"/>
+      <ellipse cx="86" cy="50" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-8 86 50)"/>
+      <ellipse cx="82" cy="80" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-10 82 80)"/>
+      <ellipse cx="78" cy="120" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-5 78 120)"/>
+      <ellipse cx="76" cy="160" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(2 76 160)"/>
+      <ellipse cx="77" cy="200" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(5 77 200)"/>
+      <ellipse cx="82" cy="240" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(12 82 240)"/>
+      <ellipse cx="95" cy="275" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(20 95 275)"/>
+      <!-- Right chain -->
+      <path d="M210,0 C212,20 218,60 222,100 Q226,140 224,180 Q222,220 212,260 Q202,290 180,310"
+        stroke="var(--chain-color, #d4a574)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <!-- Right chain link texture -->
+      <path d="M210,0 C212,20 218,60 222,100 Q226,140 224,180 Q222,220 212,260 Q202,290 180,310"
+        stroke="var(--chain-highlight, #e8c9a0)" stroke-width="0.6" fill="none" stroke-dasharray="2,4" opacity="0.5"/>
+      <!-- Right chain individual link ovals -->
+      <ellipse cx="212" cy="20" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(5 212 20)"/>
+      <ellipse cx="214" cy="50" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(8 214 50)"/>
+      <ellipse cx="218" cy="80" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(10 218 80)"/>
+      <ellipse cx="222" cy="120" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(5 222 120)"/>
+      <ellipse cx="224" cy="160" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-2 224 160)"/>
+      <ellipse cx="223" cy="200" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-5 223 200)"/>
+      <ellipse cx="218" cy="240" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-12 218 240)"/>
+      <ellipse cx="205" cy="275" rx="2" ry="3.5" stroke="var(--chain-color, #d4a574)" stroke-width="0.8" fill="none" transform="rotate(-20 205 275)"/>
+      <!-- Small connector holes on bar -->
+      <circle cx="122" cy="315" r="2" fill="var(--chain-shadow, #b8855a)"/>
+      <circle cx="178" cy="315" r="2" fill="var(--chain-shadow, #b8855a)"/>
+      <!-- Bar pendant -->
+      <rect x="85" y="308" width="130" height="30" rx="3" fill="url(#pendantGrad)" filter="url(#pendantShadow)"/>
+      <!-- Bar shine -->
+      <rect x="85" y="308" width="130" height="10" rx="3" fill="url(#pendantShine)"/>
+      <!-- Bar bottom edge -->
+      <rect x="85" y="335" width="130" height="1.5" rx="0.5" fill="rgba(0,0,0,0.15)"/>
+      <!-- Subtle bar side edges -->
+      <line x1="85" y1="311" x2="85" y2="336" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+      <line x1="215" y1="311" x2="215" y2="336" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+    </svg>`;
+
+    function selectDemoProduct(btn) {
+      document.querySelectorAll('.demo-product-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mockup = document.getElementById('demoMockup');
+      const product = btn.dataset.product;
+      mockup.className = 'demo-mockup ' + product;
+      const size = productSizes[product];
+      if (size) {
+        mockup.style.width = size.w;
+        mockup.style.height = size.h;
+      }
+      // Inject product SVGs
+      const existingSvg = mockup.querySelector('.product-svg, .bottle-svg, .necklace-svg');
+      if (existingSvg) existingSvg.remove();
+      const existingPhoto = mockup.querySelector('.mockup-photo');
+      if (existingPhoto) existingPhoto.remove();
+      if (productSVGs[product]) {
+        mockup.insertAdjacentHTML('afterbegin', productSVGs[product]);
+      }
+      // Show/hide keychain shape & charm options
+      const kcGroup = document.getElementById('keychainOptionsGroup');
+      kcGroup.style.display = product === 'keychain' ? '' : 'none';
+      // Show/hide card material options
+      const cardMatGroup = document.getElementById('cardMaterialGroup');
+      cardMatGroup.style.display = product === 'cards' ? '' : 'none';
+      renderProductColors(product);
+      updateUploadVisibility();
+      updatePreview();
+    }
+
+    // ===== KEYCHAIN SHAPE & CHARM =====
+    // ===== CARD MATERIAL =====
+    let currentCardMaterial = 'cardboard';
+
+    function selectCardMaterial(btn) {
+      document.querySelectorAll('#cardMaterialGroup .kc-opt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCardMaterial = btn.dataset.material;
+      // Swap color options based on material
+      if (currentCardMaterial === 'metal') {
+        renderProductColors('cards_metal');
+      } else {
+        renderProductColors('cards');
+      }
+      // Update SVG texture
+      rebuildCardSVG();
+    }
+
+    function rebuildCardSVG() {
+      const mockup = document.getElementById('demoMockup');
+      const product = document.querySelector('.demo-product-btn.active')?.dataset.product;
+      if (product !== 'cards') return;
+      const existingSvg = mockup.querySelector('.product-svg');
+      if (existingSvg) existingSvg.remove();
+      // Use metal or cardboard SVG
+      const svgToUse = currentCardMaterial === 'metal' ? getMetalCardSVG() : productSVGs.cards;
+      mockup.insertAdjacentHTML('afterbegin', svgToUse);
+      // Re-apply current color
+      const activeColor = document.querySelector('.demo-pcolor-btn.active');
+      if (activeColor) activeColor.click();
+    }
+
+    function getMetalCardSVG() {
+      return `<svg class="product-svg" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#c0c0c0"/>
+            <stop offset="60%" stop-color="#b8b8b8"/><stop offset="100%" stop-color="#aaa"/>
+          </linearGradient>
+          <linearGradient id="cMetalShine" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+            <stop offset="40%" stop-color="rgba(255,255,255,0.08)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <filter id="cShadow"><feDropShadow dx="3" dy="5" stdDeviation="6" flood-opacity="0.4"/></filter>
+        </defs>
+        <!-- Main card -->
+        <rect x="20" y="20" width="280" height="160" rx="6" fill="url(#cFill)" filter="url(#cShadow)"/>
+        <!-- Metal shine -->
+        <rect x="20" y="20" width="280" height="160" rx="6" fill="url(#cMetalShine)"/>
+        <!-- Brushed metal texture lines -->
+        <line x1="25" y1="40" x2="295" y2="40" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="25" y1="55" x2="295" y2="55" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="25" y1="70" x2="295" y2="70" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="25" y1="85" x2="295" y2="85" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="25" y1="100" x2="295" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="25" y1="115" x2="295" y2="115" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="25" y1="130" x2="295" y2="130" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="25" y1="145" x2="295" y2="145" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="25" y1="160" x2="295" y2="160" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <!-- Edge bevel -->
+        <rect x="21" y="21" width="278" height="158" rx="5" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+        <!-- Bottom edge shadow -->
+        <rect x="20" y="172" width="280" height="2" rx="1" fill="rgba(0,0,0,0.15)"/>
+      </svg>`;
+    }
+
+    let currentKeychainShape = 'dogtag';
+    let currentKeychainCharm = 'cross';
+
+    function selectKeychainShape(btn) {
+      document.querySelectorAll('.kc-opt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentKeychainShape = btn.dataset.shape;
+      rebuildKeychainSVG();
+    }
+
+    function selectKeychainCharm(btn) {
+      document.querySelectorAll('.kc-charm-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentKeychainCharm = btn.dataset.charm;
+      rebuildKeychainSVG();
+    }
+
+    function getKeychainCharmSVG(charm) {
+      if (charm === 'none') return '';
+      if (charm === 'cross') return `
+        <rect x="130" y="55" width="4" height="25" rx="1" fill="#666"/>
+        <rect x="125" y="62" width="14" height="4" rx="1" fill="#666"/>
+        <rect x="130" y="55" width="4" height="25" rx="1" fill="rgba(255,255,255,0.08)"/>`;
+      if (charm === 'star') return `
+        <polygon points="132,52 135,63 146,63 137,70 140,81 132,74 124,81 127,70 118,63 129,63" fill="#666"/>
+        <polygon points="132,52 135,63 146,63 137,70 140,81 132,74 124,81 127,70 118,63 129,63" fill="rgba(255,255,255,0.08)"/>`;
+      if (charm === 'heart') return `
+        <path d="M132,58 C132,52 124,50 122,56 C120,62 132,74 132,74 C132,74 144,62 142,56 C140,50 132,52 132,58Z" fill="#666"/>
+        <path d="M132,58 C132,52 124,50 122,56 C120,62 132,74 132,74 C132,74 144,62 142,56 C140,50 132,52 132,58Z" fill="rgba(255,255,255,0.08)"/>`;
+      return '';
+    }
+
+    function getKeychainShapeSVG(shape) {
+      if (shape === 'dogtag') return `
+        <rect x="50" y="108" width="100" height="170" rx="14" fill="url(#kTag)" filter="url(#kShadow)"/>
+        <rect x="52" y="110" width="96" height="166" rx="12" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <rect x="50" y="108" width="100" height="170" rx="14" fill="url(#kShine)"/>
+        <rect x="55" y="115" width="90" height="155" rx="10" fill="rgba(255,255,255,0.02)"/>
+        <circle cx="100" cy="120" r="5" fill="#222" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>`;
+      if (shape === 'circle') return `
+        <circle cx="100" cy="195" r="80" fill="url(#kTag)" filter="url(#kShadow)"/>
+        <circle cx="100" cy="195" r="78" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <circle cx="100" cy="195" r="80" fill="url(#kShine)"/>
+        <circle cx="100" cy="195" r="72" fill="rgba(255,255,255,0.02)"/>
+        <circle cx="100" cy="122" r="5" fill="#222" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>`;
+      if (shape === 'rectangle') return `
+        <rect x="45" y="108" width="110" height="170" rx="6" fill="url(#kTag)" filter="url(#kShadow)"/>
+        <rect x="47" y="110" width="106" height="166" rx="5" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <rect x="45" y="108" width="110" height="170" rx="6" fill="url(#kShine)"/>
+        <rect x="50" y="115" width="100" height="155" rx="4" fill="rgba(255,255,255,0.02)"/>
+        <circle cx="100" cy="120" r="5" fill="#222" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>`;
+      if (shape === 'heart') return `
+        <path d="M100,280 C100,280 30,220 30,170 C30,140 50,115 75,115 C90,115 100,128 100,128 C100,128 110,115 125,115 C150,115 170,140 170,170 C170,220 100,280 100,280Z" fill="url(#kTag)" filter="url(#kShadow)"/>
+        <path d="M100,275 C100,275 35,218 35,170 C35,143 53,120 75,120 C88,120 98,131 100,133 C102,131 112,120 125,120 C147,120 165,143 165,170 C165,218 100,275 100,275Z" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <path d="M100,280 C100,280 30,220 30,170 C30,140 50,115 75,115 C90,115 100,128 100,128 C100,128 110,115 125,115 C150,115 170,140 170,170 C170,220 100,280 100,280Z" fill="url(#kShine)"/>
+        <circle cx="100" cy="130" r="5" fill="#222" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>`;
+      return '';
+    }
+
+    function buildKeychainSVG() {
+      return `<svg class="product-svg" viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="kTag" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="25%" stop-color="#444"/>
+            <stop offset="50%" stop-color="#4a4a4a"/><stop offset="75%" stop-color="#3e3e3e"/>
+            <stop offset="100%" stop-color="#2a2a2a"/>
+          </linearGradient>
+          <linearGradient id="kShine" x1="0.3" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.1)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+          <filter id="kShadow"><feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.4"/></filter>
+        </defs>
+        <!-- Key ring -->
+        <circle cx="100" cy="40" r="28" stroke="#888" stroke-width="5" fill="none"/>
+        <circle cx="100" cy="40" r="28" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+        <path d="M72,40 Q72,38 74,38" stroke="#888" stroke-width="3" fill="none"/>
+        <!-- Charm -->
+        ${getKeychainCharmSVG(currentKeychainCharm)}
+        <!-- Chain links -->
+        <ellipse cx="100" cy="72" rx="4" ry="6" stroke="#777" stroke-width="2" fill="none"/>
+        <ellipse cx="100" cy="86" rx="4" ry="6" stroke="#777" stroke-width="2" fill="none"/>
+        <!-- Connector -->
+        <rect x="95" y="94" width="10" height="14" rx="3" fill="#555"/>
+        <!-- Tag shape -->
+        ${getKeychainShapeSVG(currentKeychainShape)}
+      </svg>`;
+    }
+
+    function rebuildKeychainSVG() {
+      const product = document.querySelector('.demo-product-btn.active')?.dataset.product;
+      if (product !== 'keychain') return;
+      const mockup = document.getElementById('demoMockup');
+      const existingSvg = mockup.querySelector('.product-svg');
+      if (existingSvg) existingSvg.remove();
+      // Update cached SVG and inject
+      productSVGs.keychain = buildKeychainSVG();
+      mockup.insertAdjacentHTML('afterbegin', productSVGs.keychain);
+      // Re-apply current color
+      const activeColorBtn = document.querySelector('#productColors .demo-pcolor-btn.active');
+      if (activeColorBtn) {
+        const colorIdx = [...document.querySelectorAll('#productColors .demo-pcolor-btn')].indexOf(activeColorBtn);
+        const colors = productColorOptions.keychain;
+        if (colors[colorIdx]) applyProductColor('keychain', colors[colorIdx], activeColorBtn);
+      }
+      updatePreview();
+    }
+
+    // Initialize keychain SVG from builder so shape/charm defaults are used
+    productSVGs.keychain = buildKeychainSVG();
+
+    function selectDemoFont(btn) {
+      document.querySelectorAll('.demo-font-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFont = btn.dataset.font;
+      // Hide custom dropdown when selecting a preset font
+      document.getElementById('customFontDropdown').style.display = 'none';
+      document.getElementById('customFontSelect').value = '';
+      updatePreview();
+    }
+
+    function toggleCustomFontDropdown() {
+      const dropdown = document.getElementById('customFontDropdown');
+      const btn = document.getElementById('customFontBtn');
+      if (dropdown.style.display === 'none') {
+        dropdown.style.display = 'block';
+        // Mark custom as active
+        document.querySelectorAll('.demo-font-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      } else {
+        dropdown.style.display = 'none';
+      }
+    }
+
+    function selectCustomFont(select) {
+      const fontFamily = select.value;
+      if (!fontFamily) return;
+      currentFont = fontFamily;
+      // Update preview text
+      const preview = document.getElementById('customFontPreview');
+      const text = document.getElementById('demoText')?.value || 'Limitless';
+      preview.style.fontFamily = fontFamily;
+      preview.textContent = text;
+      updatePreview();
+    }
+
+    // Show/hide upload based on product
+    function updateUploadVisibility() {
+      const product = document.querySelector('.demo-product-btn.active')?.dataset.product;
+      const uploadGroup = document.getElementById('uploadGroup');
+      if (product === 'journal' || product === 'keychain' || product === 'cards') {
+        uploadGroup.classList.remove('hidden');
+      } else {
+        uploadGroup.classList.add('hidden');
+        // Hide uploaded image on non-supported products
+        document.getElementById('demoEngraveImgWrap').style.display = 'none';
+      }
+    }
+
+    // File upload handling
+    const fileInput = document.getElementById('demoFileInput');
+    const uploadArea = document.getElementById('demoUploadArea');
+
+    uploadArea.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') fileInput.click();
+    });
+
+    // Drag and drop
+    uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) handleFile(fileInput.files[0]);
+    });
+
+    let originalUploadedImage = null; // Store original for reprocessing
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imgUrl = e.target.result;
+        originalUploadedImage = imgUrl;
+        // Show thumbnail
+        document.getElementById('demoUploadThumb').src = imgUrl;
+        document.getElementById('demoUploadContent').style.display = 'none';
+        document.getElementById('demoUploadPreview').style.display = 'flex';
+        // Show image directly on mockup (no background removal)
+        const engraveImg = document.getElementById('demoEngraveImg');
+        engraveImg.src = imgUrl;
+        document.getElementById('demoEngraveImgWrap').style.display = 'block';
+        document.getElementById('demoEngraveText').style.opacity = '0.3';
+        document.getElementById('demoImgControls').style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function reprocessBackground(val) {
+      document.getElementById('bgRemoveVal').textContent = val;
+      if (!originalUploadedImage) return;
+      if (parseInt(val) === 0) {
+        // No removal - show original
+        document.getElementById('demoEngraveImg').src = originalUploadedImage;
+        return;
+      }
+      removeBackground(originalUploadedImage, parseInt(val), (transparentUrl) => {
+        document.getElementById('demoEngraveImg').src = transparentUrl;
+      });
+    }
+
+    // Remove background using flood fill from edges
+    function removeBackground(imgUrl, toleranceVal, callback) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const w = img.width, h = img.height;
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, w, h);
+        const data = imageData.data;
+        const visited = new Uint8Array(w * h);
+        const tolerance = toleranceVal;
+
+        // Get pixel color at index
+        function getPixel(idx) {
+          const i = idx * 4;
+          return { r: data[i], g: data[i+1], b: data[i+2] };
+        }
+
+        // Check if two colors are similar
+        function isSimilar(c1, c2) {
+          return Math.abs(c1.r - c2.r) + Math.abs(c1.g - c2.g) + Math.abs(c1.b - c2.b) < tolerance;
+        }
+
+        // Sample background color from edges
+        let samples = [];
+        for (let x = 0; x < w; x += Math.max(1, Math.floor(w/20))) {
+          samples.push(getPixel(x)); // top edge
+          samples.push(getPixel((h-1) * w + x)); // bottom edge
+        }
+        for (let y = 0; y < h; y += Math.max(1, Math.floor(h/20))) {
+          samples.push(getPixel(y * w)); // left edge
+          samples.push(getPixel(y * w + w - 1)); // right edge
+        }
+
+        // Average the edge samples for background color
+        let bgR = 0, bgG = 0, bgB = 0;
+        samples.forEach(s => { bgR += s.r; bgG += s.g; bgB += s.b; });
+        const bgColor = { r: Math.round(bgR/samples.length), g: Math.round(bgG/samples.length), b: Math.round(bgB/samples.length) };
+
+        // Flood fill from all edge pixels
+        const queue = [];
+
+        // Add all edge pixels to queue
+        for (let x = 0; x < w; x++) {
+          queue.push(x); // top
+          queue.push((h-1) * w + x); // bottom
+        }
+        for (let y = 0; y < h; y++) {
+          queue.push(y * w); // left
+          queue.push(y * w + w - 1); // right
+        }
+
+        // BFS flood fill
+        while (queue.length > 0) {
+          const idx = queue.pop();
+          if (idx < 0 || idx >= w * h || visited[idx]) continue;
+
+          const pixel = getPixel(idx);
+          if (!isSimilar(pixel, bgColor)) continue;
+
+          visited[idx] = 1;
+          // Make transparent
+          data[idx * 4 + 3] = 0;
+
+          const x = idx % w;
+          const y = Math.floor(idx / w);
+
+          // Add neighbors
+          if (x > 0) queue.push(idx - 1);
+          if (x < w - 1) queue.push(idx + 1);
+          if (y > 0) queue.push(idx - w);
+          if (y < h - 1) queue.push(idx + w);
+        }
+
+        // Second pass: remove remaining light/white pixels not caught by flood fill
+        // This catches trapped white areas inside the image
+        if (toleranceVal > 40) {
+          const whiteTolerance = Math.min(toleranceVal * 1.2, 250);
+          for (let i = 0; i < w * h; i++) {
+            if (data[i * 4 + 3] === 0) continue; // already transparent
+            const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
+            // Check if pixel is close to white/very light
+            const brightness = (r + g + b) / 3;
+            const saturation = Math.max(r, g, b) - Math.min(r, g, b);
+            // Remove if very bright AND low saturation (white/light grey)
+            if (brightness > (255 - whiteTolerance * 0.4) && saturation < (whiteTolerance * 0.6)) {
+              // Check if near already-transparent pixels (within 3px)
+              const x = i % w, y = Math.floor(i / w);
+              let nearTransparent = false;
+              for (let dy = -3; dy <= 3 && !nearTransparent; dy++) {
+                for (let dx = -3; dx <= 3 && !nearTransparent; dx++) {
+                  const nx = x + dx, ny = y + dy;
+                  if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+                    if (data[(ny * w + nx) * 4 + 3] === 0) nearTransparent = true;
+                  }
+                }
+              }
+              if (nearTransparent) {
+                data[i * 4 + 3] = 0;
+              }
+            }
+          }
+          // Repeat proximity check a few times to cascade
+          for (let pass = 0; pass < 3; pass++) {
+            for (let i = 0; i < w * h; i++) {
+              if (data[i * 4 + 3] === 0) continue;
+              const r = data[i * 4], g = data[i * 4 + 1], b = data[i * 4 + 2];
+              const brightness = (r + g + b) / 3;
+              const saturation = Math.max(r, g, b) - Math.min(r, g, b);
+              if (brightness > (255 - whiteTolerance * 0.35) && saturation < (whiteTolerance * 0.5)) {
+                const x = i % w, y = Math.floor(i / w);
+                let nearTransparent = false;
+                for (let dy = -2; dy <= 2 && !nearTransparent; dy++) {
+                  for (let dx = -2; dx <= 2 && !nearTransparent; dx++) {
+                    const nx = x + dx, ny = y + dy;
+                    if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+                      if (data[(ny * w + nx) * 4 + 3] === 0) nearTransparent = true;
+                    }
+                  }
+                }
+                if (nearTransparent) data[i * 4 + 3] = 0;
+              }
+            }
+          }
+        }
+
+        // Soften edges - make pixels next to transparent ones semi-transparent
+        const alphaData = new Uint8Array(w * h);
+        for (let i = 0; i < w * h; i++) alphaData[i] = data[i * 4 + 3];
+
+        for (let y = 1; y < h - 1; y++) {
+          for (let x = 1; x < w - 1; x++) {
+            const idx = y * w + x;
+            if (alphaData[idx] === 0) continue;
+            // Check if any neighbor is transparent
+            const neighbors = [alphaData[idx-1], alphaData[idx+1], alphaData[idx-w], alphaData[idx+w]];
+            const transparentNeighbors = neighbors.filter(n => n === 0).length;
+            if (transparentNeighbors > 0) {
+              data[idx * 4 + 3] = Math.round(255 * (1 - transparentNeighbors * 0.2));
+            }
+          }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+        callback(canvas.toDataURL('image/png'));
+      };
+      img.src = imgUrl;
+    }
+
+    function clearUpload() {
+      originalUploadedImage = null;
+      document.getElementById('demoUploadThumb').src = '';
+      document.getElementById('demoUploadContent').style.display = 'block';
+      document.getElementById('demoUploadPreview').style.display = 'none';
+      document.getElementById('demoEngraveImgWrap').style.display = 'none';
+      document.getElementById('demoEngraveImg').style.filter = '';
+      document.getElementById('demoEngraveText').style.opacity = '1';
+      document.getElementById('demoFileInput').value = '';
+      document.getElementById('demoImgControls').style.display = 'none';
+    }
+
+    function updateImgSize(val) {
+      const img = document.getElementById('demoEngraveImg');
+      img.style.maxWidth = 'none';
+      img.style.maxHeight = 'none';
+      img.style.width = val + '%';
+    }
+
+    function updateImgRotation(val) {
+      document.getElementById('imgRotDeg').textContent = val + '°';
+      const wrap = document.getElementById('demoEngraveImgWrap');
+      wrap.style.transform = `translate(-50%, -50%) rotate(${val}deg)`;
+    }
+
+    function updateImgOpacity(val) {
+      document.getElementById('demoEngraveImg').style.opacity = val / 100;
+    }
+
+    function updateImgTint(btn) {
+      document.querySelectorAll('.img-tint-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tint = btn.dataset.tint;
+      const img = document.getElementById('demoEngraveImg');
+      const rotation = img.style.transform.match(/rotate\((\d+)deg\)/)?.[1] || '0';
+      switch(tint) {
+        case 'none':
+          img.style.filter = '';
+          break;
+        case 'gold':
+          img.style.filter = 'sepia(1) saturate(0.8) brightness(0.9) hue-rotate(-10deg)';
+          break;
+        case 'silver':
+          img.style.filter = 'grayscale(1) brightness(1.2)';
+          break;
+        case 'dark':
+          img.style.filter = 'grayscale(1) brightness(0.3)';
+          break;
+      }
+    }
+
+    // Initial state
+    renderProductColors('journal');
+    updateUploadVisibility();
+
+    // ===== DRAGGABLE ELEMENTS =====
+    function makeDraggable(el) {
+      let isDragging = false;
+      let startX, startY, origLeft, origTop;
+
+      function getPos(e) {
+        const t = e.touches ? e.touches[0] : e;
+        return { x: t.clientX, y: t.clientY };
+      }
+
+      function onStart(e) {
+        // Don't drag if clicking a resize handle
+        if (e.target.classList.contains('demo-resize-handle')) return;
+        e.preventDefault();
+        isDragging = true;
+        el.classList.add('dragging');
+        const pos = getPos(e);
+        const rect = el.getBoundingClientRect();
+        const parentRect = el.parentElement.getBoundingClientRect();
+        startX = pos.x;
+        startY = pos.y;
+        // Current position relative to parent center
+        origLeft = rect.left - parentRect.left - parentRect.width / 2 + rect.width / 2;
+        origTop = rect.top - parentRect.top - parentRect.height / 2 + rect.height / 2;
+      }
+
+      function onMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        const dx = pos.x - startX;
+        const dy = pos.y - startY;
+        const newLeft = origLeft + dx;
+        const newTop = origTop + dy;
+        // Convert to percentage of parent
+        const parent = el.parentElement;
+        const leftPct = 50 + (newLeft / parent.offsetWidth) * 100;
+        const topPct = 50 + (newTop / parent.offsetHeight) * 100;
+        el.style.left = leftPct + '%';
+        el.style.top = topPct + '%';
+      }
+
+      function onEnd() {
+        if (isDragging) {
+          document.getElementById('demoResetBtn').classList.add('show');
+        }
+        isDragging = false;
+        el.classList.remove('dragging');
+      }
+
+      // Mouse events
+      el.addEventListener('mousedown', onStart);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+
+      // Touch events
+      el.addEventListener('touchstart', onStart, { passive: false });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onEnd);
+    }
+
+    // Image resize via corner drag
+    (function initImgResize() {
+      let resizing = false, startX = 0, startWidth = 0, handle = null;
+      const wrap = document.getElementById('demoEngraveImgWrap');
+      if (!wrap) return;
+
+      document.querySelectorAll('#demoEngraveImgWrap .resize-handle').forEach(h => {
+        h.addEventListener('mousedown', startResize);
+        h.addEventListener('touchstart', startResize, { passive: false });
+      });
+
+      function startResize(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        resizing = true;
+        handle = e.target;
+        const pos = e.touches ? e.touches[0] : e;
+        startX = pos.clientX;
+        startWidth = wrap.offsetWidth;
+      }
+
+      document.addEventListener('mousemove', doResize);
+      document.addEventListener('touchmove', doResize, { passive: false });
+
+      function doResize(e) {
+        if (!resizing) return;
+        e.preventDefault();
+        const pos = e.touches ? e.touches[0] : e;
+        const dx = pos.clientX - startX;
+        const isLeft = handle.classList.contains('resize-handle-tl') || handle.classList.contains('resize-handle-bl');
+        const newWidth = isLeft ? startWidth - dx : startWidth + dx;
+        const minW = 30, maxW = wrap.parentElement.offsetWidth * 1.5;
+        if (newWidth > minW && newWidth < maxW) {
+          wrap.style.width = newWidth + 'px';
+        }
+      }
+
+      document.addEventListener('mouseup', endResize);
+      document.addEventListener('touchend', endResize);
+
+      function endResize() {
+        resizing = false;
+        handle = null;
+      }
+    })();
+
+    // ===== RESIZE HANDLES =====
+    function addResizeHandles(el) {
+      // Make the text element position:relative so handles position correctly
+      if (getComputedStyle(el).position === 'static') {
+        el.style.position = 'relative';
+      }
+
+      const positions = ['bottom-right', 'bottom-left', 'top-right', 'top-left'];
+      positions.forEach(pos => {
+        const handle = document.createElement('div');
+        handle.className = 'demo-resize-handle ' + pos;
+        el.appendChild(handle);
+        makeResizable(el, handle);
+      });
+
+      // Store individual font size
+      if (!el.dataset.fontSize) {
+        const computed = parseFloat(getComputedStyle(el).fontSize);
+        el.dataset.fontSize = computed;
+      }
+    }
+
+    function makeResizable(el, handle) {
+      let isResizing = false;
+      let startDist, startFontSize;
+
+      function getPos(e) {
+        const t = e.touches ? e.touches[0] : e;
+        return { x: t.clientX, y: t.clientY };
+      }
+
+      function getCenterOfEl() {
+        const rect = el.getBoundingClientRect();
+        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      }
+
+      function distFromCenter(px, py) {
+        const c = getCenterOfEl();
+        return Math.sqrt((px - c.x) ** 2 + (py - c.y) ** 2);
+      }
+
+      function onStart(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        isResizing = true;
+        el.classList.add('resizing');
+        const pos = getPos(e);
+        startDist = distFromCenter(pos.x, pos.y);
+        startFontSize = parseFloat(el.dataset.fontSize) || parseFloat(getComputedStyle(el).fontSize);
+      }
+
+      function onMove(e) {
+        if (!isResizing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        const currentDist = distFromCenter(pos.x, pos.y);
+        const scale = currentDist / startDist;
+        let newSize = Math.round(startFontSize * scale);
+        newSize = Math.max(8, Math.min(80, newSize));
+        el.dataset.fontSize = newSize;
+        el.style.fontSize = newSize + 'px';
+      }
+
+      function onEnd() {
+        if (isResizing) {
+          el.dataset.userResized = 'true';
+          document.getElementById('demoResetBtn').classList.add('show');
+        }
+        isResizing = false;
+        el.classList.remove('resizing');
+      }
+
+      handle.addEventListener('mousedown', onStart);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+
+      handle.addEventListener('touchstart', onStart, { passive: false });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onEnd);
+    }
+
+    function resetPositions() {
+      const text = document.getElementById('demoEngraveText');
+      const imgWrap = document.getElementById('demoEngraveImgWrap');
+      text.style.left = '50%';
+      text.style.top = '50%';
+      imgWrap.style.left = '50%';
+      imgWrap.style.top = '50%';
+      imgWrap.style.width = '60%';
+      // Clear user-resized flags so auto-sizing kicks back in
+      delete text.dataset.userResized;
+      delete text.dataset.fontSize;
+      document.querySelectorAll('.demo-extra-text').forEach(ext => {
+        delete ext.dataset.userResized;
+        delete ext.dataset.fontSize;
+      });
+      document.getElementById('demoResetBtn').classList.remove('show');
+      updatePreview();
+    }
+
+    // Make text and image draggable
+    makeDraggable(document.getElementById('demoEngraveText'));
+    makeDraggable(document.getElementById('demoEngraveImg'));
+
+    // Add resize handles to main text
+    addResizeHandles(document.getElementById('demoEngraveText'));
+
+    // Extra text lines
+    let extraTextCount = 0;
+
+    function addTextLine() {
+      extraTextCount++;
+      const id = 'extraText' + extraTextCount;
+
+      // Add input row
+      const container = document.getElementById('extraTextInputs');
+      const row = document.createElement('div');
+      row.className = 'extra-text-row';
+      row.id = 'extraRow' + extraTextCount;
+      row.innerHTML = `
+        <input type="text" class="demo-text-input" id="${id}Input" placeholder="Line ${extraTextCount + 1}..." oninput="updateExtraText('${id}')">
+        <button class="extra-text-remove" onclick="removeTextLine('${id}')">&times;</button>
+      `;
+      container.appendChild(row);
+
+      // Add text element to mockup
+      const mockup = document.getElementById('demoMockup');
+      const textEl = document.createElement('div');
+      textEl.className = 'demo-extra-text demo-draggable';
+      textEl.id = id;
+      textEl.style.fontFamily = currentFont;
+      textEl.style.color = window.currentEngraveColor || '#8a7560';
+      textEl.style.left = '50%';
+      textEl.style.top = (55 + extraTextCount * 10) + '%';
+      textEl.style.transform = 'translate(-50%, -50%)';
+      textEl.textContent = 'Line ' + (extraTextCount + 1);
+      mockup.appendChild(textEl);
+
+      // Make it draggable and resizable
+      makeDraggable(textEl);
+      addResizeHandles(textEl);
+
+      // Focus the input
+      document.getElementById(id + 'Input').focus();
+    }
+
+    function updateExtraText(id) {
+      const input = document.getElementById(id + 'Input');
+      const textEl = document.getElementById(id);
+      if (input && textEl) {
+        // Update text without destroying resize handles
+        const textNode = Array.from(textEl.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+        if (textNode) {
+          textNode.textContent = input.value || 'Line';
+        } else {
+          textEl.insertBefore(document.createTextNode(input.value || 'Line'), textEl.firstChild);
+        }
+        textEl.style.fontFamily = currentFont;
+        textEl.style.color = window.currentEngraveColor || '#8a7560';
+      }
+    }
+
+    function removeTextLine(id) {
+      const row = document.getElementById(id.replace('extraText', 'extraRow'));
+      const textEl = document.getElementById(id);
+      if (row) row.remove();
+      if (textEl) textEl.remove();
+    }
+
+    // Text size and rotation
+    let textSize = 28;
+    let textRotation = 0;
+
+    function updateTextSize(val) {
+      // Size is now controlled per-element via resize handles
+    }
+
+    function updateTextRotation(val) {
+      textRotation = parseInt(val);
+      document.getElementById('textRotDeg').textContent = textRotation + '°';
+      const el = document.getElementById('demoEngraveText');
+      el.style.transform = `translate(-50%, -50%) rotate(${textRotation}deg)`;
+      document.querySelectorAll('.demo-extra-text').forEach(ext => {
+        ext.style.transform = `translate(-50%, -50%) rotate(${textRotation}deg)`;
+      });
+    }
+
+    // Image hue and brightness
+    let imgHue = 0;
+    let imgBrightness = 100;
+
+    function updateImgHue(val) {
+      imgHue = parseInt(val);
+      applyImgFilters();
+    }
+
+    function updateImgBrightness(val) {
+      imgBrightness = parseInt(val);
+      applyImgFilters();
+    }
+
+    function updateImgCustomColor(color) {
+      // Use a color overlay via CSS - reset tint buttons
+      document.querySelectorAll('.img-tint-btn').forEach(b => b.classList.remove('active'));
+      const img = document.getElementById('demoEngraveImg');
+      // Convert hex to hue
+      const r = parseInt(color.substr(1,2), 16) / 255;
+      const g = parseInt(color.substr(3,2), 16) / 255;
+      const b = parseInt(color.substr(5,2), 16) / 255;
+      const max = Math.max(r,g,b), min = Math.min(r,g,b);
+      let h = 0;
+      if (max !== min) {
+        const d = max - min;
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        else if (max === g) h = ((b - r) / d + 2) / 6;
+        else h = ((r - g) / d + 4) / 6;
+      }
+      imgHue = Math.round(h * 360);
+      const sat = max === 0 ? 0 : ((max - min) / max);
+      img.style.filter = `sepia(1) saturate(${sat * 3}) hue-rotate(${imgHue}deg) brightness(${imgBrightness/100})`;
+    }
+
+    function applyImgFilters() {
+      const img = document.getElementById('demoEngraveImg');
+      if (imgHue === 0 && imgBrightness === 100) {
+        img.style.filter = '';
+      } else {
+        img.style.filter = `hue-rotate(${imgHue}deg) brightness(${imgBrightness/100})`;
+      }
+    }
+
+    let textHidden = false;
+    function toggleNoText() {
+      textHidden = !textHidden;
+      const btn = document.getElementById('noTextBtn');
+      const mainText = document.getElementById('demoEngraveText');
+      const extraTexts = document.querySelectorAll('.demo-extra-text');
+      if (textHidden) {
+        btn.textContent = 'SHOW TEXT';
+        btn.style.background = 'rgba(212,165,116,0.2)';
+        btn.style.borderColor = 'rgba(212,165,116,0.5)';
+        btn.style.color = '#d4a574';
+        mainText.style.display = 'none';
+        extraTexts.forEach(t => t.style.display = 'none');
+      } else {
+        btn.textContent = 'HIDE TEXT';
+        btn.style.background = 'rgba(255,255,255,0.1)';
+        btn.style.borderColor = 'rgba(255,255,255,0.2)';
+        btn.style.color = '#aaa';
+        mainText.style.display = '';
+        extraTexts.forEach(t => t.style.display = '');
+        updatePreview();
+      }
+    }
+
+    function updatePreview() {
+      if (textHidden) return;
+      const text = document.getElementById('demoText').value || 'Limitless';
+      const el = document.getElementById('demoEngraveText');
+      const product = document.querySelector('.demo-product-btn.active')?.dataset.product || 'journal';
+      // Update text without destroying resize handles
+      const textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+      if (textNode) {
+        textNode.textContent = text;
+      } else {
+        el.insertBefore(document.createTextNode(text), el.firstChild);
+      }
+      el.style.fontFamily = currentFont;
+      el.style.color = window.currentEngraveColor || '#8a7560';
+
+      // Position text on the engravable area of each product photo
+      const positions = {
+        journal:  { top: '50%', left: '45%' },
+        bottle:   { top: '58%', left: '50%' },
+        necklace: { top: '89%', left: '50%' },
+        bracelet: { top: '50%', left: '50%' },
+        keychain: currentKeychainShape === 'heart' ? { top: '62%', left: '50%' } :
+                  currentKeychainShape === 'circle' ? { top: '56%', left: '50%' } :
+                  { top: '58%', left: '50%' },
+        cards:    { top: '50%', left: '50%' }
+      };
+      const pos = positions[product] || { top: '50%', left: '50%' };
+      if (!el.dataset.userDragged) {
+        el.style.top = pos.top;
+        el.style.left = pos.left;
+      }
+      el.dataset.userDragged = '';
+
+      // Size based on product and text length (only if not manually resized)
+      if (!el.dataset.fontSize || !el.dataset.userResized) {
+        let baseSize = 28;
+        if (product === 'necklace' || product === 'bracelet') baseSize = 14;
+        if (product === 'bottle') baseSize = 20;
+        if (product === 'keychain') baseSize = 14;
+        if (product === 'cards') baseSize = 22;
+
+        if (text.length > 20) {
+          el.style.fontSize = (baseSize - 8) + 'px';
+        } else if (text.length > 12) {
+          el.style.fontSize = (baseSize - 4) + 'px';
+        } else {
+          el.style.fontSize = baseSize + 'px';
+        }
+        el.dataset.fontSize = parseFloat(el.style.fontSize);
+      }
+
+      // Update extra text elements too
+      document.querySelectorAll('.demo-extra-text').forEach(ext => {
+        ext.style.fontFamily = currentFont;
+        ext.style.color = window.currentEngraveColor || '#8a7560';
+      });
+    }
+
+    // Nav scroll effect - add 'scrolled' class when past hero
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
