@@ -439,9 +439,17 @@
             <div class="order-summary">
               <h2>Order Summary</h2>
               ${itemsHtml}
+              <div style="display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid #eee;color:#666;">
+                <span>Subtotal</span>
+                <span>$${total.toFixed(2)}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:8px 0;color:#666;">
+                <span>Shipping (flat rate)</span>
+                <span>$5.00</span>
+              </div>
               <div class="order-total">
                 <span>Total</span>
-                <span>$${total.toFixed(2)}</span>
+                <span>$${(total + 5).toFixed(2)}</span>
               </div>
               <a href="index.html#products" class="edit-cart-link">&larr; Edit Cart</a>
             </div>
@@ -544,13 +552,21 @@
                   <div id="reviewItems"></div>
                 </div>
 
-                <div class="order-total" style="margin-top:16px;">
-                  <span>Total</span>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;color:#666;margin-top:16px;border-top:1px solid #eee;">
+                  <span>Subtotal</span>
                   <span>$${total.toFixed(2)}</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:8px 0;color:#666;">
+                  <span>Shipping</span>
+                  <span>$5.00</span>
+                </div>
+                <div class="order-total">
+                  <span>Total</span>
+                  <span>$${(total + 5).toFixed(2)}</span>
                 </div>
 
                 <!-- TODO: Replace with Stripe Checkout when ready -->
-                <button class="btn-place-order" onclick="placeOrder()">Place Order | $${total.toFixed(2)}</button>
+                <button class="btn-place-order" onclick="placeOrder()">Place Order | $${(total + 5).toFixed(2)}</button>
 
                 <div class="stripe-placeholder">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
@@ -665,7 +681,9 @@
         body += ` | $${(item.price * (item.quantity || 1)).toFixed(2)}%0D%0A`;
       });
 
-      body += `%0D%0ATOTAL: $${total.toFixed(2)}`;
+      body += `%0D%0ASubtotal: $${total.toFixed(2)}`;
+      body += `%0D%0AShipping: $5.00`;
+      body += `%0D%0ATOTAL: $${(total + 5).toFixed(2)}`;
 
       // Check if any items have uploads
       const hasUploads = cart.some(item => item.hasImage || item.hasPreviewScreenshot);
@@ -681,7 +699,9 @@
       formData.append('phone', phone);
       formData.append('address', address);
       formData.append('order_details', decodeURIComponent(body.replace(/%0D%0A/g, '\n')));
-      formData.append('total', '$' + total.toFixed(2));
+      formData.append('subtotal', '$' + total.toFixed(2));
+      formData.append('shipping', '$5.00');
+      formData.append('total', '$' + (total + 5).toFixed(2));
 
       fetch('https://formspree.io/f/mwvwbzjd', {
         method: 'POST',
