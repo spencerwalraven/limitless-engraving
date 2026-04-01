@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M31EPNVCX9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-M31EPNVCX9');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bulk & Corporate Orders | Limitless Engraving</title>
   <meta name="description" content="Custom laser engraving for weddings, corporate events, team gifts, and large orders. Volume discounts available.">
@@ -447,12 +450,26 @@
               body += `Quantity: ${qty}\n`;
               if (details) body += `\nDetails:\n${details}`;
 
-              const subject = encodeURIComponent('Bulk Business Card Quote from ' + name + (company ? ' at ' + company : ''));
-              window.open(`mailto:limitlessengravingco@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`, '_blank');
+              const formData = new FormData();
+              formData.append('_subject', 'Bulk Business Card Quote from ' + name + (company ? ' at ' + company : ''));
+              formData.append('name', name);
+              formData.append('email', email);
+              if (company) formData.append('company', company);
+              formData.append('card_type', type);
+              formData.append('quantity', qty);
+              if (details) formData.append('details', details);
 
-              document.getElementById('bulkForm').reset();
-              document.getElementById('bulkSuccess').style.display = 'block';
-              setTimeout(() => { document.getElementById('bulkSuccess').style.display = 'none'; }, 5000);
+              fetch('https://formspree.io/f/mwvwbzjd', {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+              }).then(r => {
+                if (r.ok) {
+                  document.getElementById('bulkForm').reset();
+                  document.getElementById('bulkSuccess').style.display = 'block';
+                  setTimeout(() => { document.getElementById('bulkSuccess').style.display = 'none'; }, 5000);
+                } else { alert('Something went wrong. Please try again.'); }
+              }).catch(() => { alert('Something went wrong. Please try again.'); });
             }
           </script>
         </div>
