@@ -511,6 +511,11 @@
     let currentIndex = 0;
     const images = [...document.querySelectorAll('.masonry-item img')].map(img => img.src);
 
+    // Auto-assign click handlers based on DOM order (overrides hardcoded onclick)
+    document.querySelectorAll('.masonry-item').forEach((item, i) => {
+      item.onclick = () => openLightbox(i);
+    });
+
     function openLightbox(index) {
       currentIndex = index;
       document.getElementById('lightboxImg').src = images[index];
