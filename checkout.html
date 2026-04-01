@@ -385,7 +385,8 @@
   <script src="js/cart.js"></script>
   <script>
     let currentStep = 1;
-    const cart = JSON.parse(localStorage.getItem('le_cart') || '[]');
+    // cart is already defined in cart.js, just refresh it
+    cart = JSON.parse(localStorage.getItem('le_cart') || '[]');
 
     function init() {
       if (cart.length === 0) {
