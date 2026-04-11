@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed | Limitless Engraving</title>
+  <link rel="icon" href="images/logo-icon.png" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #1a1a1a;
+      color: #f5f0eb;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .success-container {
+      text-align: center;
+      max-width: 600px;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #2d5a3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+    }
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: #4ade80;
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #f5f0eb;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #a09080;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .info-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    .info-box h3 {
+      color: #c9a96e;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .info-box p {
+      color: #a09080;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 35px;
+      background: #c9a96e;
+      color: #1a1a1a;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s;
+      margin: 5px;
+    }
+    .btn:hover { background: #d4b87a; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #f5f0eb;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.05); }
+    .logo {
+      margin-bottom: 40px;
+    }
+    .logo img {
+      height: 60px;
+      filter: brightness(0) invert(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.png" alt="Limitless Engraving"></a>
+    </div>
+
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <h1>Order Confirmed!</h1>
+    <p class="subtitle">Thank you for your order. Payment has been received and your engraving is being prepared.</p>
+
+    <div class="info-box">
+      <h3>What happens next?</h3>
+      <p>Our team will review your design and begin engraving. You'll receive an email confirmation with your order details and tracking information once your order ships. Most orders ship within 1-3 business days.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>Questions?</h3>
+      <p>If you need to make changes to your order or have any questions, reach out to us at <a href="mailto:limitlessengravingco@gmail.com" style="color:#c9a96e;">limitlessengravingco@gmail.com</a></p>
+    </div>
+
+    <a href="index.html" class="btn">Back to Home</a>
+    <a href="gallery.html" class="btn btn-outline">View Gallery</a>
+  </div>
+
+  <script>
+    // Clear the cart after successful payment
+    localStorage.removeItem('cart');
+  </script>
+</body>
+</html>

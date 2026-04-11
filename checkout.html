@@ -566,12 +566,13 @@
                   <span>$${(total + 5).toFixed(2)}</span>
                 </div>
 
-                <!-- TODO: Replace with Stripe Checkout when ready -->
-                <button class="btn-place-order" onclick="placeOrder()">Place Order | $${(total + 5).toFixed(2)}</button>
-
-                <div class="stripe-placeholder">
+                <button class="btn-place-order" onclick="payWithStripe()">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                  Secure payment via Stripe coming soon. Orders are confirmed manually for now.
+                  Pay Now | $${(total + 5).toFixed(2)}
+                </button>
+
+                <div style="text-align:center;margin-top:10px;color:#666;font-size:0.85rem;">
+                  Secure payment powered by Stripe
                 </div>
 
                 <div class="form-nav" style="margin-top:16px;">
@@ -646,6 +647,102 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function payWithStripe() {
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const apt = document.getElementById('apt').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const zip = document.getElementById('zip').value;
+
+      const payBtn = document.querySelector('.btn-place-order');
+      if (payBtn) { payBtn.textContent = 'Processing...'; payBtn.disabled = true; }
+
+      // Build order details for Formspree (so Ezra gets design info)
+      let orderDetails = `NEW ORDER from ${name}\n\n`;
+      orderDetails += `CONTACT\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n`;
+      orderDetails += `SHIPPING\n${address}${apt ? ', ' + apt : ''}\n${city}, ${state} ${zip}\n\n`;
+      orderDetails += `ITEMS\n`;
+
+      let total = 0;
+      const stripeItems = [];
+      cart.forEach((item, i) => {
+        total += item.price * (item.quantity || 1);
+        let desc = '';
+        if (item.cardType) desc += `${item.cardType} | `;
+        if (item.engravingText) desc += `Text: "${item.engravingText}" | `;
+        if (item.font) desc += `Font: ${item.font} | `;
+        if (item.productColorName) desc += `Color: ${item.productColorName} | `;
+        if (item.hasImage) desc += `Custom design uploaded | `;
+        if (item.designDescription) desc += `Notes: ${item.designDescription} | `;
+        desc = desc.replace(/ \| $/, '');
+
+        orderDetails += `${i + 1}. ${item.product} - $${(item.price * (item.quantity || 1)).toFixed(2)}\n`;
+        if (desc) orderDetails += `   ${desc}\n`;
+
+        stripeItems.push({
+          name: item.product,
+          description: desc || 'Custom engraving',
+          price: item.price,
+          quantity: item.quantity || 1,
+        });
+      });
+
+      orderDetails += `\nSubtotal: $${total.toFixed(2)}`;
+      orderDetails += `\nShipping: $5.00`;
+      orderDetails += `\nTOTAL: $${(total + 5).toFixed(2)}`;
+
+      // Send order details to Formspree first (so Ezra gets design info even if payment takes time)
+      const formData = new FormData();
+      formData.append('_subject', `New Order from ${name} | Limitless Engraving`);
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('address', `${address}${apt ? ', ' + apt : ''}, ${city}, ${state} ${zip}`);
+      formData.append('order_details', orderDetails);
+      formData.append('total', '$' + (total + 5).toFixed(2));
+
+      fetch('https://formspree.io/f/mwvwbzjd', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).catch(() => {}); // Don't block on this
+
+      // Create Stripe Checkout session
+      fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: stripeItems,
+          shipping: 5,
+          customer: {
+            name: name,
+            email: email,
+            phone: phone,
+            address: `${address}${apt ? ', ' + apt : ''}, ${city}, ${state} ${zip}`,
+          }
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.url) {
+          // Clear cart before redirect
+          localStorage.removeItem('le_cart');
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Failed to create checkout session');
+        }
+      })
+      .catch(err => {
+        console.error('Checkout error:', err);
+        if (payBtn) { payBtn.textContent = 'Pay Now | $' + (total + 5).toFixed(2); payBtn.disabled = false; }
+        alert('There was an issue connecting to payment. Your order details have been sent and our team will reach out with payment instructions.');
+      });
+    }
+
+    // Keep old function as fallback
     function placeOrder() {
       const name = document.getElementById('fullName').value;
       const email = document.getElementById('email').value;
