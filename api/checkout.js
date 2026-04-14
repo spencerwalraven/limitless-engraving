@@ -1,6 +1,9 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 module.exports = async (req, res) => {
+  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2023-10-16',
+    maxNetworkRetries: 3,
+    timeout: 30000,
+  });
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
