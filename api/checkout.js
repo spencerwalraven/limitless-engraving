@@ -58,7 +58,13 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error('Stripe error:', err.message);
-    res.status(500).json({ error: err.message });
+    console.error('Stripe error:', err.message, err.type, err.code);
+    res.status(500).json({
+      error: err.message,
+      type: err.type || 'unknown',
+      code: err.code || 'unknown',
+      keyPresent: !!process.env.STRIPE_SECRET_KEY,
+      keyStart: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 8) + '...' : 'missing'
+    });
   }
 };
