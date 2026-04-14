@@ -1,11 +1,11 @@
 module.exports = async (req, res) => {
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16',
-    maxNetworkRetries: 3,
-    timeout: 30000,
-  });
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    return res.status(500).json({ error: 'Stripe not configured' });
   }
 
   try {
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
           name: item.name,
           description: item.description || '',
         },
-        unit_amount: Math.round(item.price * 100), // Stripe uses cents
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity || 1,
     }));
@@ -43,34 +43,47 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Create Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: lineItems,
-      mode: 'payment',
-      success_url: `${req.headers.origin || 'https://limitless-engraving.vercel.app'}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin || 'https://limitless-engraving.vercel.app'}/checkout.html`,
-      customer_email: customer?.email || undefined,
-      metadata: {
-        customer_name: customer?.name || '',
-        customer_phone: customer?.phone || '',
-        shipping_address: customer?.address || '',
-        order_notes: customer?.notes || '',
+    const origin = req.headers.origin || 'https://limitless-engraving.vercel.app';
+
+    // Use fetch directly to Stripe API
+    const params = new URLSearchParams();
+    lineItems.forEach((item, i) => {
+      params.append(`line_items[${i}][price_data][currency]`, item.price_data.currency);
+      params.append(`line_items[${i}][price_data][product_data][name]`, item.price_data.product_data.name);
+      if (item.price_data.product_data.description) {
+        params.append(`line_items[${i}][price_data][product_data][description]`, item.price_data.product_data.description);
+      }
+      params.append(`line_items[${i}][price_data][unit_amount]`, item.price_data.unit_amount);
+      params.append(`line_items[${i}][quantity]`, item.quantity);
+    });
+    params.append('mode', 'payment');
+    params.append('success_url', `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`);
+    params.append('cancel_url', `${origin}/checkout.html`);
+    if (customer?.email) params.append('customer_email', customer.email);
+    if (customer?.name) params.append('metadata[customer_name]', customer.name);
+    if (customer?.phone) params.append('metadata[customer_phone]', customer.phone);
+    if (customer?.address) params.append('metadata[shipping_address]', customer.address);
+    if (customer?.notes) params.append('metadata[order_notes]', customer.notes);
+
+    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${secretKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
+      body: params.toString(),
     });
 
-    res.status(200).json({ url: session.url });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Stripe API error:', data);
+      return res.status(response.status).json({ error: data.error?.message || 'Stripe error' });
+    }
+
+    res.status(200).json({ url: data.url });
   } catch (err) {
-    console.error('Stripe error:', err.message, err.type, err.code);
-    res.status(500).json({
-      error: err.message,
-      type: err.type || 'unknown',
-      code: err.code || 'unknown',
-      keyPresent: !!process.env.STRIPE_SECRET_KEY,
-      keyLength: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.length : 0,
-      keyStart: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 12) + '...' : 'missing',
-      keyEnd: process.env.STRIPE_SECRET_KEY ? '...' + process.env.STRIPE_SECRET_KEY.substring(process.env.STRIPE_SECRET_KEY.length - 4) : 'missing',
-      hasWhitespace: process.env.STRIPE_SECRET_KEY ? /\s/.test(process.env.STRIPE_SECRET_KEY) : false
-    });
+    console.error('Server error:', err.message);
+    res.status(500).json({ error: err.message });
   }
 };
