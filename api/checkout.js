@@ -64,7 +64,10 @@ module.exports = async (req, res) => {
       type: err.type || 'unknown',
       code: err.code || 'unknown',
       keyPresent: !!process.env.STRIPE_SECRET_KEY,
-      keyStart: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 8) + '...' : 'missing'
+      keyLength: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.length : 0,
+      keyStart: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 12) + '...' : 'missing',
+      keyEnd: process.env.STRIPE_SECRET_KEY ? '...' + process.env.STRIPE_SECRET_KEY.substring(process.env.STRIPE_SECRET_KEY.length - 4) : 'missing',
+      hasWhitespace: process.env.STRIPE_SECRET_KEY ? /\s/.test(process.env.STRIPE_SECRET_KEY) : false
     });
   }
 };
