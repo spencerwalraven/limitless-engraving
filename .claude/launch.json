@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "limitless",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "3458", "--directory", "/Users/spencerwalraven/limitless-engraving"],
+      "port": 3458
+    }
+  ]
+}
